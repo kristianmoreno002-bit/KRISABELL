@@ -3,24 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>proyecto_jovenes_creativos</title>
+    <title>KRISABELL</title>
+    <meta name="description" content="KRISABELL es una marca de cosméticos que ofrece productos de alta calidad para resaltar la belleza de cada persona.">
+   
+    <!--fuentes-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+   
+    <!-- Estilos -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><h1>Krisabell</h1></header>
-      <table>
-        <thead>
-            <tr>
-              <nav><th><a href="Maquillaje.html">Maquillaje</a></th>
-                <th><a href="accesorios.html">Accesorios</a></th>
-                <th><a href="promociones.html">Promociones</a></th>
-                <th><a href="carrito.html">Carrito</a></th> 
-                <th><a href="Login.html">Login</a></th>
-              </nav>
-            </tr> 
-        </thead>
-    </table>
-    <h2>resalta tu belleza, se tu mejor versión</h2>
+      <header class="site-header">
+    <div class="header-inner">
+ <a href="index.html" class="logo" aria-label="Krisabell – Inicio">
+    <img src="img/imagen.jpeg" alt="Logo de Krisabell" class="logo-img">
+</a>
+      <a href="index.html" class="logo" aria-label="Krisabell — Inicio">
+       <span class="logo-word">KRISABELL</span>
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="paginas/Maquillaje.html">Maquillaje</a></li>
+          <li><a href="paginas/Cuidadofacial.html">Cuidado Facial</a></li>
+          <li><a href="paginas/accesorios.html">Accesorios</a></li>
+          <li><a href="paginas/Novedades.html">Novedades</a></li>
+          <li><a href="paginas/Ofertas.html">Ofertas</a></li>
+          <li><a href="paginas/Nosotros.html">Nosotros</a></li>
+        </ul>
+      </nav>
+       <div class="header-actions">
+        <button type="button" class="icon-btn" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="21" y1="21" x2="16.5" y2="16.5" stroke="currentColor" stroke-width="1.6"/></svg>
+        </button>
+        <a href="paginas/Login.html" class="icon-btn" aria-label="Mi cuenta">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 20c1.5-4 4.7-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        </a>
+        <a href="paginas/Carrito.html" class="icon-btn cart-btn" aria-label="Carrito de compras, 0 productos">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+       <button type="button" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
  
-    <img src="img/imagen.jpeg" alt="Logo de la marca">
-</body>
+  <main id="main-content">
+    <h2>resalta tu belleza, se tu mejor versión</h2>
+ <section class="trust-row" aria-label="Compromisos de la marca">
+      <ul class="trust-list">
+        <li class="trust-item">
+          <svg class="trust-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4 L34 11 V21 C34 29 28 34 20 36 C12 34 6 29 6 21 V11 Z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M14 20 l4 4 8 -9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+          <div>
+            <h2 class="trust-title">Fórmulas de calidad</h2>
+            <p class="trust-copy">Ingredientes seguros y efectivos</p>
+          </div>
+        </li>
+        <li class="trust-item">
+          <svg class="trust-icon" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M13 20a7 7 0 0 1 14 0M13 20a7 7 0 0 0 14 0" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+          <div>
+            <h2 class="trust-title">Cruelty free</h2>
+            <p class="trust-copy">No probamos en animales</p>
+          </div>
+        </li>
+        <li class="trust-item">
+          <svg class="trust-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4 L34 10 V19 C34 28 28 33 20 36 C12 33 6 28 6 19 V10 Z" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="15" y="17" width="10" height="8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M17 17v-3a3 3 0 0 1 6 0v3" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+          <div>
+            <h2 class="trust-title">Compra segura</h2>
+            <p class="trust-copy">Protegemos tus datos y transacciones</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+ 
+    <!-- ===================== GARANTÍAS (fila 2) ===================== -->
+    <section class="perks-row" aria-label="Beneficios de compra">
+      <ul class="perks-list">
+        <li class="perk-item">
+          <svg class="perk-icon" viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="14" width="30" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M20 14V8M14 8h12l3 6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+          <div>
+            <h2 class="perk-title">Envío gratis</h2>
+            <p class="perk-copy">En compras +$999</p>
+          </div>
+        </li>
+        <li class="perk-item">
+          <svg class="perk-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 5 L24 15 L35 16 L27 23 L29 34 L20 28 L11 34 L13 23 L5 16 L16 15 Z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+          <div>
+            <h2 class="perk-title">Ofertas exclusivas</h2>
+            <p class="perk-copy">Todas las semanas</p>
+          </div>
+        </li>
+        <li class="perk-item">
+          <svg class="perk-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4 6 11v9c0 9 6 14 14 16 8-2 14-7 14-16v-9Z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M20 13v8M20 25h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <div>
+            <h2 class="perk-title">Atención personalizada</h2>
+            <p class="perk-copy">Siempre para ti</p>
+          </div>
+        </li>
+      </ul>
+    </section>
 </html>
