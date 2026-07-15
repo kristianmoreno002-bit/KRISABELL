@@ -13,20 +13,28 @@
    
     <!-- Estilos -->
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
+
       <header class="site-header">
-    <div class="header-inner">
+   
+        <div class="header-inner">
  <a href="index.html" class="logo" aria-label="Krisabell – Inicio">
-    <img src="img/imagen.jpeg" alt="Logo de Krisabell" class="logo-img">
+    <img src="img/image.jpeg" alt="Logo de Krisabell" class="logo-img">
+
 </a>
-      <a href="index.html" class="logo" aria-label="Krisabell — Inicio">
-       <span class="logo-word">KRISABELL</span>
-      </a>
       <nav class="main-nav" aria-label="Navegación principal">
         <ul>
           <li><a href="index.html">Inicio</a></li>
-          <li><a href="paginas/Maquillaje.html">Maquillaje</a></li>
+          <li>
+            <a href="paginas/Maquillaje.html">Maquillaje</a>
+             <ul>
+                <li><a href="paginas/Maquillaje.html#Labios">Labios</a></li>
+                <li><a href="paginas/Maquillaje.html#Ojos">Ojos</a></li>
+                <li><a href="paginas/Maquillaje.html#Rostro">Rostro</a></li>
+             </ul>
+          </li>
           <li><a href="paginas/Cuidadofacial.html">Cuidado Facial</a></li>
           <li><a href="paginas/accesorios.html">Accesorios</a></li>
           <li><a href="paginas/Novedades.html">Novedades</a></li>
@@ -53,7 +61,7 @@
   </header>
  
   <main id="main-content">
-    <h2>resalta tu belleza, se tu mejor versión</h2>
+    <h2 class="belleza">Resalta tu belleza.</h2><h2 class="mejor_version">Se tu mejor versión.</h2>
  <section class="trust-row" aria-label="Compromisos de la marca">
       <ul class="trust-list">
         <li class="trust-item">
@@ -106,4 +114,62 @@
         </li>
       </ul>
     </section>
+
+     <footer class="site-footer">
+    <div class="footer-inner">
+ 
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+  
+          <span class="logo-word">KRISABELL</span>
+        </a>
+        <p class="footer-tagline">Belleza como forma de expresión y autocuidado.</p>
+        <ul class="social-list" aria-label="Redes sociales">
+          <li><a href="#" aria-label="Instagram">IG</a></li>
+          <li><a href="#" aria-label="TikTok">TT</a></li>
+          <li><a href="#" aria-label="Facebook">FB</a></li>
+        </ul>
+      </div>
+ 
+      <nav class="footer-nav" aria-label="Comprar">
+        <h3>Comprar</h3>
+        <ul>
+          <li><a href="paginas/Maquillaje.html">Maquillaje</a></li> 
+          <li><a href="paginas/Cuidadofacial.html">Cuidado Facial</a></li>
+          <li><a href="paginas/Accesorios.html">Accesorios</a></li>
+          <li><a href="paginas/Novedades.html">Novedades</a></li>
+          <li><a href="paginas/Ofertas.html">Ofertas</a></li>
+        </ul>
+      </nav>
+ 
+      <nav class="footer-nav" aria-label="Ayuda">
+        <h3>Ayuda</h3>
+        <ul>
+          <li><a href="paginas/Ayuda.html">Preguntas frecuentes</a></li>
+          <li><a href="paginas/Ayuda.html#envios">Envíos</a></li>
+          <li><a href="paginas/Ayuda.html#cambios">Cambios y devoluciones</a></li>
+          <li><a href="paginas/Ayuda.html#pagos">Medios de pago</a></li>
+          <li><a href="paginas/Contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+ 
+      <nav class="footer-nav" aria-label="Krisabell">
+        <h3>Krisabell</h3>
+        <ul>
+          <li><a href="paginas/Nosotros.html">Nosotros</a></li>
+          <li><a href="paginas/Contacto.html">Contacto</a></li>
+          <li><a href="paginas/Ayuda.html#terminos">Términos y condiciones</a></li>
+          <li><a href="paginas/Ayuda.html#privacidad">Política de privacidad</a></li>
+        </ul>
+      </nav>
+ 
+    </div>
+ 
+    <div class="footer-bottom">
+      <p>&copy; 2026 Krisabell. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+ 
+  <script src="script.js"></script>
+</body>
 </html>
