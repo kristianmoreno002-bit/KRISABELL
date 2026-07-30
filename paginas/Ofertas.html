@@ -1,12 +1,232 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ofertas</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ofertas | KRISABELL</title>
+  <meta name="description"
+    content="Aprovecha las ofertas y descuentos exclusivos de KRISABELL en productos seleccionados de maquillaje y cuidado facial.">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../style/style.css">
 </head>
+
 <body>
-    <h1>Ofertas</h1>
-    <p>¡Descubre nuestras mejores ofertas!</p>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo" aria-label="Krisabell – Inicio">
+        <img src="../img/image.jpeg" alt="Logo de Krisabell" class="logo-img">
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <ul class="menu-list">
+          <li><a href="../index.html">Inicio</a></li>
+          <li>
+            <a href="Maquillaje.html">Maquillaje</a>
+            <ul>
+              <li><a href="Maquillaje.html#Labios">Labios</a></li>
+              <li><a href="Maquillaje.html#Ojos">Ojos</a></li>
+              <li><a href="Maquillaje.html#Rostro">Rostro</a></li>
+            </ul>
+          </li>
+          <li><a href="Cuidadofacial.html">Cuidado Facial</a></li>
+          <li><a href="Accesorios.html">Accesorios</a></li>
+          <li><a href="Novedades.html">Novedades</a></li>
+          <li><a href="Ofertas.html" class="active">Ofertas</a></li>
+          <li><a href="Nosotros.html">Nosotros</a></li>
+        </ul>
+
+        <div class="header-actions">
+          <button type="button" class="icon-btn" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <line x1="21" y1="21" x2="16.5" y2="16.5" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </button>
+          <a href="Login.html" class="icon-btn" aria-label="Mi cuenta">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <path d="M4 20c1.5-4 4.7-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </a>
+          <a href="Carrito.html" class="icon-btn cart-btn" aria-label="Carrito de compras, 0 productos">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z" fill="none" stroke="currentColor"
+                stroke-width="1.6" />
+              <path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+
+        <button type="button" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== CONTENIDO PRINCIPAL ===================== -->
+  <main id="main-content">
+    
+    <!-- Banner de Categoría -->
+    <section class="category-hero">
+      <h1 class="category-title">Ofertas Exclusivas</h1>
+      <p class="category-subtitle">Descuentos especiales por tiempo limitado en tus favoritos de belleza.</p>
+    </section>
+
+    <!-- SECCIÓN: OFERTAS -->
+    <section class="catalog-section">
+      <div class="section-header">
+        <h2>Precios Especiales</h2>
+        <p>Aprovecha los precios rebajados antes de que se agote el stock.</p>
+      </div>
+
+      <div class="product-grid">
+        <!-- Producto 1 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/kit-rutina-facial.jpg" alt="Kit Rutina Facial Glow" class="product-img" loading="lazy">
+            <span class="product-tag tag-discount">-30% OFF</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Kit Rutina Glow Esencial</h3>
+            <p class="product-shade">Incluye Limpiador + Serum + Crema</p>
+            <p class="product-price">
+              <span class="old-price">$1,390.00 MXN</span>
+              $973.00 MXN
+            </p>
+            <button type="button" class="btn-add-cart" data-id="ofe-01" data-name="Kit Rutina Glow Esencial" data-price="973">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Producto 2 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/duo-labiales.jpg" alt="Duo Labiales Velvet Match" class="product-img" loading="lazy">
+            <span class="product-tag tag-discount">-20% OFF</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Dúo Velvet Match</h3>
+            <p class="product-shade">2 Labiales Mate (Tono Nude & Red)</p>
+            <p class="product-price">
+              <span class="old-price">$700.00 MXN</span>
+              $560.00 MXN
+            </p>
+            <button type="button" class="btn-add-cart" data-id="ofe-02" data-name="Dúo Velvet Match" data-price="560">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Producto 3 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/paleta-iluminadores.jpg" alt="Paleta de Iluminadores Glow Trio" class="product-img" loading="lazy">
+            <span class="product-tag tag-discount">-25% OFF</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Paleta Glow Trio</h3>
+            <p class="product-shade">3 Tonos Iluminadores en Polvo</p>
+            <p class="product-price">
+              <span class="old-price">$480.00 MXN</span>
+              $360.00 MXN
+            </p>
+            <button type="button" class="btn-add-cart" data-id="ofe-03" data-name="Paleta Glow Trio" data-price="360">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Producto 4 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/mascarilla-nocturna.jpg" alt="Mascarilla Nocturna Hydra Overnight" class="product-img" loading="lazy">
+            <span class="product-tag tag-discount">-15% OFF</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Hydra Overnight Mask</h3>
+            <p class="product-shade">Mascarilla Reparadora Intensa 50ml</p>
+            <p class="product-price">
+              <span class="old-price">$420.00 MXN</span>
+              $357.00 MXN
+            </p>
+            <button type="button" class="btn-add-cart" data-id="ofe-04" data-name="Hydra Overnight Mask" data-price="357">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">
+          <span class="logo-word">KRISABELL</span>
+        </a>
+        <p class="footer-tagline">Belleza como forma de expresión y autocuidado.</p>
+        <ul class="social-list" aria-label="Redes sociales">
+          <li><a href="#" aria-label="Instagram">IG</a></li>
+          <li><a href="#" aria-label="TikTok">TT</a></li>
+          <li><a href="#" aria-label="Facebook">FB</a></li>
+        </ul>
+      </div>
+
+      <nav class="footer-nav" aria-label="Comprar">
+        <h3>Comprar</h3>
+        <ul>
+          <li><a href="Maquillaje.html">Maquillaje</a></li>
+          <li><a href="Cuidadofacial.html">Cuidado Facial</a></li>
+          <li><a href="Accesorios.html">Accesorios</a></li>
+          <li><a href="Novedades.html">Novedades</a></li>
+          <li><a href="Ofertas.html">Ofertas</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-nav" aria-label="Ayuda">
+        <h3>Ayuda</h3>
+        <ul>
+          <li><a href="Ayuda.html">Preguntas frecuentes</a></li>
+          <li><a href="Ayuda.html#envios">Envíos</a></li>
+          <li><a href="Ayuda.html#cambios">Cambios y devoluciones</a></li>
+          <li><a href="Ayuda.html#pagos">Medios de pago</a></li>
+          <li><a href="Contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-nav" aria-label="Krisabell">
+        <h3>Krisabell</h3>
+        <ul>
+          <li><a href="Nosotros.html">Nosotros</a></li>
+          <li><a href="Contacto.html">Contacto</a></li>
+          <li><a href="Ayuda.html#terminos">Términos y condiciones</a></li>
+          <li><a href="Ayuda.html#privacidad">Política de privacidad</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Krisabell. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
 </body>
+
 </html>

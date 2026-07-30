@@ -1,0 +1,1848 @@
+/* ==========================================================================
+   1. VARIABLES Y CONFIGURACIÓN GENERAL
+   ========================================================================== */
+:root {
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Jost', sans-serif;
+
+  /* Paleta de colores */
+  --clr-bg: #0c0c12;          /* Blanco cálido/crema */
+  --clr-surface: #09090e;     /* Blanco puro */
+  --clr-text-main: #dea323;   /* Oscuro neutro */
+  --clr-text-muted: #fefefe;  /* Gris suave */
+  --clr-accent: #dea323;      /* Dorado / Champán */
+  --clr-accent-soft: #F4EAE1; /* Beige suave */
+  --clr-rose: #E8D5C8;        /* Rosa neutro */
+  --clr-border: #E8E2D9;      /* Borde sutil */
+
+  --header-height: 80px;
+  --max-width: 1200px;
+  --transition: all 0.3s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--clr-bg);
+  color: var(--clr-text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+ul {
+  list-style: none;
+}
+
+/* ==========================================================================
+   2. HEADER & NAVEGACIÓN
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--clr-border);
+  z-index: 1000;
+  height: var(--header-height);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-img {
+  height: 78px;
+  width: auto;
+  object-fit: contain;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.menu-list {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.menu-list a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.menu-list a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--clr-accent);
+  transition: var(--transition);
+}
+
+.menu-list a:hover::after {
+  width: 100%;
+}
+
+/* Submenú desplegable */
+.menu-list li {
+  position: relative;
+}
+
+.menu-list li ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--clr-surface);
+  min-width: 180px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  border: 1px solid var(--clr-border);
+  padding: 0.8rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: var(--transition);
+  border-radius: 4px;
+}
+
+.menu-list li:hover ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menu-list li ul a {
+  padding: 0.5rem 1.5rem;
+  display: block;
+  text-transform: capitalize;
+}
+
+.menu-list li ul a::after {
+  display: none;
+}
+
+.menu-list li ul a:hover {
+  background-color: var(--clr-accent-soft);
+  color: var(--clr-accent);
+}
+
+/* Botones de acción */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--clr-text-main);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn svg {
+  width: 22px;
+  height: 22px;
+  transition: var(--transition);
+}
+
+.icon-btn:hover svg {
+  color: var(--clr-accent);
+}
+
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: var(--clr-accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Botón Hamburguesa */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+}
+
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background-color: var(--clr-text-main);
+  transition: var(--transition);
+}
+
+/* ==========================================================================
+   3. SECCIÓN HERO
+   ========================================================================== */
+.hero-section {
+  text-align: center;
+  padding: 5rem 1.5rem 3rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.belleza {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  color: var(--clr-text-main);
+}
+
+.mejor_version {
+  font-size: 1.2rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+}
+
+/* ==========================================================================
+   4. SECCIÓN GARANTÍAS Y BENEFICIOS
+   ========================================================================== */
+.garantias {
+  max-width: var(--max-width);
+  margin: 2rem auto 5rem;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.trust-row, .perks-row {
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.trust-list, .perks-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.trust-item, .perk-item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.trust-icon, .perk-icon {
+  width: 42px;
+  height: 42px;
+  color: var(--clr-accent);
+  flex-shrink: 0;
+}
+
+.trust-title, .perk-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.trust-copy, .perk-copy {
+  font-size: 0.88rem;
+  color: var(--clr-text-muted);
+}
+
+/* ==========================================================================
+   5. FOOTER
+   ========================================================================== */
+.site-footer {
+  background-color: var(--clr-surface);
+  border-top: 1px solid var(--clr-border);
+  padding-top: 4rem;
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.logo-word {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.footer-tagline {
+  margin: 1rem 0 1.5rem;
+  color: var(--clr-text-muted);
+  font-size: 0.95rem;
+}
+
+.social-list {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-list a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--clr-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.social-list a:hover {
+  background-color: var(--clr-accent);
+  color: #fff;
+  border-color: var(--clr-accent);
+}
+
+.footer-nav h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+}
+
+.footer-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-nav a {
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+}
+
+.footer-nav a:hover {
+  color: var(--clr-accent);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--clr-border);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE / MÓVIL
+   ========================================================================== */
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .menu-list {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    background-color: var(--clr-surface);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: var(--transition);
+  }
+
+  /* Estado cuando el menú se abre en JS */
+  .main-nav.is-open .menu-list {
+    transform: translateX(0);
+  }
+
+  .menu-list li ul {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    padding-left: 1rem;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+/* ==========================================================================
+   VISTA DE MAQUILLAJE (Maquillaje.html)
+   ========================================================================== */
+
+/* Hero Banner de la Categoría
+   ========================================================================== */
+.category-hero {
+  background-color: var(--clr-surface, #f9f6f0);
+  text-align: center;
+  padding: 4rem 1.5rem 3rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--clr-border, #e5e0d8);
+}
+
+.category-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 2.8rem;
+  font-weight: 500;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.category-subtitle {
+  color: var(--clr-text-muted, #5f5d5d);
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Secciones de Catálogo (Labios, Ojos, Rostro)
+   ========================================================================== */
+.catalog-section {
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto 5rem;
+  padding: 0 1.5rem;
+  scroll-margin-top: 5rem; /* Permite un desplazamiento suave con los enlaces con ancla (#) */
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.section-header h2 {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.4rem;
+}
+
+.section-header p {
+  color: var(--clr-text-muted, #666666);
+  font-size: 0.95rem;
+}
+
+.section-header::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--clr-accent, #c9a078);
+  margin: 1rem auto 0;
+}
+
+/* Grilla de Productos
+   ========================================================================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+/* Tarjeta de Producto
+   ========================================================================== */
+.product-card {
+  background-color: var(--clr-bg, #ffffff);
+  border: 1px solid var(--clr-border, #e5e0d8);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Contenedor de Imagen y Badge */
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Mantiene relación de aspecto 1:1 (cuadrado) */
+  background-color: var(--clr-surface, #f9f6f0);
+  overflow: hidden;
+}
+
+.product-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+}
+
+.product-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: var(--clr-text-main, #1a1a1a);
+  color: #ffffff;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 2px;
+  font-weight: 500;
+  z-index: 2;
+}
+
+/* Información del Producto */
+.product-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+}
+
+.product-shade {
+  font-size: 0.85rem;
+  color: var(--clr-text-muted, #666666);
+  margin-bottom: 0.8rem;
+}
+
+.product-price {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 1.2rem;
+  margin-top: auto; /* Empuja el precio y botón al final si los títulos tienen diferentes largos */
+}
+
+/* Botón Añadir al Carrito */
+.btn-add-cart {
+  width: 100%;
+  background-color: transparent;
+  color: var(--clr-text-main, #1a1a1a);
+  border: 1px solid var(--clr-text-main, #1a1a1a);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body, "Jost", sans-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-add-cart:hover {
+  background-color: var(--clr-text-main, #1a1a1a);
+  color: #ffffff;
+}
+
+/* Adaptación Responsiva para Pantallas Pequeñas */
+@media (max-width: 600px) {
+  .category-title {
+    font-size: 2.2rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .product-info {
+    padding: 1rem;
+  }
+
+  .product-title {
+    font-size: 1.1rem;
+  }
+
+  .btn-add-cart {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+/* ==========================================================================
+   VISTA DE ACCESORIOS (Accesorios.html)
+   ========================================================================== */
+
+/* Hero Banner
+   ========================================================================== */
+.category-hero {
+  background-color: var(--clr-surface, #f9f6f0);
+  text-align: center;
+  padding: 4rem 1.5rem 3rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--clr-border, #e5e0d8);
+}
+
+.category-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 2.8rem;
+  font-weight: 500;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.category-subtitle {
+  color: var(--clr-text-muted, #666666);
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Sección de Catálogo
+   ========================================================================== */
+.catalog-section {
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto 5rem;
+  padding: 0 1.5rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.section-header h2 {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.4rem;
+}
+
+.section-header p {
+  color: var(--clr-text-muted, #666666);
+  font-size: 0.95rem;
+}
+
+.section-header::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--clr-accent, #c9a078);
+  margin: 1rem auto 0;
+}
+
+/* Grilla de Productos
+   ========================================================================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+/* Tarjeta de Producto
+   ========================================================================== */
+.product-card {
+  background-color: var(--clr-bg, #ffffff);
+  border: 1px solid var(--clr-border, #e5e0d8);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Contenedor de Imagen y Etiquetas */
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Relación de aspecto 1:1 */
+  background-color: var(--clr-surface, #f9f6f0);
+  overflow: hidden;
+}
+
+.product-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+}
+
+.product-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: var(--clr-text-main, #1a1a1a);
+  color: #ffffff;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 2px;
+  font-weight: 500;
+  z-index: 2;
+}
+
+/* Información del Producto */
+.product-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+}
+
+.product-shade {
+  font-size: 0.85rem;
+  color: var(--clr-text-muted, #666666);
+  margin-bottom: 0.8rem;
+}
+
+.product-price {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 1.2rem;
+  margin-top: auto;
+}
+
+/* Botón Añadir al Carrito */
+.btn-add-cart {
+  width: 100%;
+  background-color: transparent;
+  color: var(--clr-text-main, #1a1a1a);
+  border: 1px solid var(--clr-text-main, #1a1a1a);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body, "Jost", sans-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-add-cart:hover {
+  background-color: var(--clr-text-main, #1a1a1a);
+  color: #ffffff;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  .category-title {
+    font-size: 2.2rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .product-info {
+    padding: 1rem;
+  }
+
+  .product-title {
+    font-size: 1.1rem;
+  }
+
+  .btn-add-cart {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+/* ==========================================================================
+   VISTA DE CUIDADO FACIAL (Cuidadofacial.html)
+   ========================================================================== */
+
+/* Hero Banner de Cuidado Facial
+   ========================================================================== */
+.category-hero {
+  background-color: var(--clr-surface, #f9f6f0);
+  text-align: center;
+  padding: 4rem 1.5rem 3rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--clr-border, #e5e0d8);
+}
+
+.category-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 2.8rem;
+  font-weight: 500;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.category-subtitle {
+  color: var(--clr-text-muted, #666666);
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Secciones del Catálogo (Limpieza, Hidratación, Tratamientos)
+   ========================================================================== */
+.catalog-section {
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto 5rem;
+  padding: 0 1.5rem;
+  scroll-margin-top: 5rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.section-header h2 {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.4rem;
+}
+
+.section-header p {
+  color: var(--clr-text-muted, #666666);
+  font-size: 0.95rem;
+}
+
+.section-header::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--clr-accent, #c9a078);
+  margin: 1rem auto 0;
+}
+
+/* Grilla de Productos
+   ========================================================================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+/* Tarjeta de Producto
+   ========================================================================== */
+.product-card {
+  background-color: var(--clr-bg, #ffffff);
+  border: 1px solid var(--clr-border, #e5e0d8);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Imagen y Etiquetas */
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  background-color: var(--clr-surface, #f9f6f0);
+  overflow: hidden;
+}
+
+.product-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+}
+
+/* Badges (Ej: Tipo de Piel, Novedad, Orgánico) */
+.product-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: var(--clr-text-main, #1a1a1a);
+  color: #ffffff;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 2px;
+  font-weight: 500;
+  z-index: 2;
+}
+
+/* Información del Producto */
+.product-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+}
+
+/* Beneficio clave o tipo de piel (Ej: "Piel Seca", "Antioxidante") */
+.product-shade {
+  font-size: 0.85rem;
+  color: var(--clr-text-muted, #666666);
+  margin-bottom: 0.8rem;
+}
+
+.product-price {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 1.2rem;
+  margin-top: auto;
+}
+
+/* Botón Añadir al Carrito */
+.btn-add-cart {
+  width: 100%;
+  background-color: transparent;
+  color: var(--clr-text-main, #1a1a1a);
+  border: 1px solid var(--clr-text-main, #1a1a1a);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body, "Jost", sans-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-add-cart:hover {
+  background-color: var(--clr-text-main, #1a1a1a);
+  color: #ffffff;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  .category-title {
+    font-size: 2.2rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .product-info {
+    padding: 1rem;
+  }
+
+  .product-title {
+    font-size: 1.1rem;
+  }
+
+  .btn-add-cart {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+/* ==========================================================================
+   VISTA DE AUTENTICACIÓN / LOGIN (Login.html)
+   ========================================================================== */
+
+/* Seccion Principal de Autenticación
+   ========================================================================== */
+.auth-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding: 4rem 1.5rem;
+  background-color: var(--clr-bg, #ffffff);
+}
+
+/* Tarjeta / Contenedor del Formulario */
+.auth-card {
+  background-color: var(--clr-surface, #f9f6f0);
+  border: 1px solid var(--clr-border, #e5e0d8);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 440px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+/* Pestañas (Iniciar Sesión / Crear Cuenta) */
+.auth-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--clr-border, #e5e0d8);
+  margin-bottom: 2rem;
+}
+
+.auth-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 0.8rem 0;
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 1.1rem;
+  color: var(--clr-text-muted, #666666);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.auth-tab.active {
+  color: var(--clr-text-main, #1a1a1a);
+  border-bottom-color: var(--clr-text-main, #1a1a1a);
+  font-weight: 600;
+}
+
+/* Encabezados del Formulario */
+.auth-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.4rem;
+  text-align: center;
+}
+
+.auth-desc {
+  color: var(--clr-text-muted, #666666);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+
+/* Campos del Formulario */
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: var(--clr-text-main, #1a1a1a);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--clr-border, #e5e0d8);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  color: var(--clr-text-main, #1a1a1a);
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--clr-accent, #c9a078);
+}
+
+/* Opciones (Recordarme y Contraseña olvidada) */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  color: var(--clr-text-muted, #666666);
+}
+
+.forgot-password {
+  color: var(--clr-text-muted, #666666);
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: var(--clr-text-main, #1a1a1a);
+}
+
+/* Botón de Envío */
+.btn-auth-submit {
+  width: 100%;
+  background-color: var(--clr-text-main, #1a1a1a);
+  color: #ffffff;
+  border: none;
+  padding: 0.85rem;
+  border-radius: 4px;
+  font-family: var(--font-body, "Jost", sans-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-auth-submit:hover {
+  background-color: var(--clr-accent, #c9a078);
+}
+
+/* Responsividad */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.8rem 1.2rem;
+  }
+
+  .auth-title {
+    font-size: 1.5rem;
+  }
+}
+/* ==========================================================================
+   VISTA DE CARRITO DE COMPRAS (Carrito.html)
+   ========================================================================== */
+
+/* Sección Contenedora
+   ========================================================================== */
+.cart-section {
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto 5rem;
+  padding: 0 1.5rem;
+}
+
+.cart-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Tabla de Productos
+   ========================================================================== */
+.cart-items-wrapper {
+  background-color: var(--clr-bg, #ffffff);
+  border: 1px solid var(--clr-border, #e5e0d8);
+  border-radius: 8px;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.cart-table th {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 1rem;
+  border-bottom: 2px solid var(--clr-border, #e5e0d8);
+  color: var(--clr-text-main, #1a1a1a);
+}
+
+.cart-table td {
+  padding: 1.2rem 1rem;
+  border-bottom: 1px solid var(--clr-border, #e5e0d8);
+  vertical-align: middle;
+  font-size: 0.95rem;
+}
+
+.cart-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Inputs y Botones dentro de la Tabla */
+.cart-qty-input {
+  width: 60px;
+  padding: 0.4rem;
+  border: 1px solid var(--clr-border, #e5e0d8);
+  border-radius: 4px;
+  text-align: center;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.cart-qty-input:focus {
+  outline: none;
+  border-color: var(--clr-accent, #c9a078);
+}
+
+.btn-remove-item {
+  background: none;
+  border: none;
+  color: #c1121f;
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  padding: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-remove-item:hover {
+  opacity: 0.7;
+}
+
+/* Estado de Carrito Vacío */
+.cart-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.cart-empty p {
+  color: var(--clr-text-muted, #666666);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-continue-shopping {
+  display: inline-block;
+  background-color: var(--clr-text-main, #1a1a1a);
+  color: #ffffff;
+  padding: 0.8rem 1.8rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-continue-shopping:hover {
+  background-color: var(--clr-accent, #c9a078);
+}
+
+/* Resumen del Pedido (Sidebar)
+   ========================================================================== */
+.cart-summary {
+  background-color: var(--clr-surface, #f9f6f0);
+  border: 1px solid var(--clr-border, #e5e0d8);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.cart-summary h2 {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--clr-border, #e5e0d8);
+  padding-bottom: 0.8rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  color: var(--clr-text-muted, #666666);
+  font-size: 0.95rem;
+}
+
+.summary-row.total-row {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--clr-text-main, #1a1a1a);
+  border-top: 1px solid var(--clr-border, #e5e0d8);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+/* Botón Proceder al Pago */
+.btn-checkout {
+  width: 100%;
+  background-color: var(--clr-text-main, #1a1a1a);
+  color: #ffffff;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  margin-top: 1.5rem;
+  font-family: var(--font-body, "Jost", sans-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-checkout:hover {
+  background-color: var(--clr-accent, #c9a078);
+}
+
+.link-keep-shopping {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--clr-text-muted, #666666);
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.link-keep-shopping:hover {
+  color: var(--clr-text-main, #1a1a1a);
+}
+
+/* Responsividad
+   ========================================================================== */
+@media (max-width: 850px) {
+  .cart-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .cart-items-wrapper {
+    padding: 0.8rem;
+  }
+
+  .cart-table th, 
+  .cart-table td {
+    padding: 0.8rem 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  .cart-qty-input {
+    width: 45px;
+    padding: 0.3rem;
+  }
+}
+/* ==========================================================================
+   VISTA DE NOVEDADES (Novedades.html)
+   ========================================================================== */
+
+/* Hero Banner
+   ========================================================================== */
+.category-hero {
+  background-color: var(--clr-surface, #f9f6f0);
+  text-align: center;
+  padding: 4rem 1.5rem 3rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--clr-border, #e5e0d8);
+}
+
+.category-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 2.8rem;
+  font-weight: 500;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.category-subtitle {
+  color: var(--clr-text-muted, #666666);
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Sección de Catálogo
+   ========================================================================== */
+.catalog-section {
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto 5rem;
+  padding: 0 1.5rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.section-header h2 {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.4rem;
+}
+
+.section-header p {
+  color: var(--clr-text-muted, #666666);
+  font-size: 0.95rem;
+}
+
+.section-header::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--clr-accent, #c9a078);
+  margin: 1rem auto 0;
+}
+
+/* Grilla de Productos
+   ========================================================================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+/* Tarjeta de Producto
+   ========================================================================== */
+.product-card {
+  background-color: var(--clr-bg, #ffffff);
+  border: 1px solid var(--clr-border, #e5e0d8);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Contenedor de Imagen y Badge de Novedad */
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Aspecto 1:1 */
+  background-color: var(--clr-surface, #f9f6f0);
+  overflow: hidden;
+}
+
+.product-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+}
+
+/* Etiqueta / Badge "Nuevo" */
+.product-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: var(--clr-accent, #c9a078);
+  color: #ffffff;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 2px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* Información del Producto */
+.product-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+}
+
+.product-shade {
+  font-size: 0.85rem;
+  color: var(--clr-text-muted, #666666);
+  margin-bottom: 0.8rem;
+}
+
+.product-price {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 1.2rem;
+  margin-top: auto;
+}
+
+/* Botón Añadir al Carrito */
+.btn-add-cart {
+  width: 100%;
+  background-color: transparent;
+  color: var(--clr-text-main, #1a1a1a);
+  border: 1px solid var(--clr-text-main, #1a1a1a);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body, "Jost", sans-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-add-cart:hover {
+  background-color: var(--clr-text-main, #1a1a1a);
+  color: #ffffff;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  .category-title {
+    font-size: 2.2rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .product-info {
+    padding: 1rem;
+  }
+
+  .product-title {
+    font-size: 1.1rem;
+  }
+
+  .btn-add-cart {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+/* ==========================================================================
+   VISTA DE OFERTAS Y PROMOCIONES (Ofertas.html)
+   ========================================================================== */
+
+/* Hero Banner
+   ========================================================================== */
+.category-hero {
+  background-color: var(--clr-surface, #f9f6f0);
+  text-align: center;
+  padding: 4rem 1.5rem 3rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--clr-border, #e5e0d8);
+}
+
+.category-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 2.8rem;
+  font-weight: 500;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.category-subtitle {
+  color: var(--clr-text-muted, #666666);
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Sección de Catálogo
+   ========================================================================== */
+.catalog-section {
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto 5rem;
+  padding: 0 1.5rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.section-header h2 {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.4rem;
+}
+
+.section-header p {
+  color: var(--clr-text-muted, #666666);
+  font-size: 0.95rem;
+}
+
+.section-header::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--clr-accent, #c9a078);
+  margin: 1rem auto 0;
+}
+
+/* Grilla de Productos
+   ========================================================================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+/* Tarjeta de Producto
+   ========================================================================== */
+.product-card {
+  background-color: var(--clr-bg, #ffffff);
+  border: 1px solid var(--clr-border, #e5e0d8);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Contenedor de Imagen y Badge de Descuento */
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Relación 1:1 */
+  background-color: var(--clr-surface, #f9f6f0);
+  overflow: hidden;
+}
+
+.product-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+}
+
+/* Badge de Descuento (ej: -20%, OFERTA) */
+.product-tag.tag-sale {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: #b33939; /* Rojo cálido sofisticado para ofertas */
+  color: #ffffff;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 2px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* Información del Producto */
+.product-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--clr-text-main, #1a1a1a);
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+}
+
+.product-shade {
+  font-size: 0.85rem;
+  color: var(--clr-text-muted, #666666);
+  margin-bottom: 0.8rem;
+}
+
+/* Estilos para Precios con Descuento */
+.product-price-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+  margin-top: auto;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #b33939; /* Destaca el precio en oferta */
+}
+
+.product-price-old {
+  font-size: 0.9rem;
+  color: var(--clr-text-muted, #666666);
+  text-decoration: line-through;
+}
+
+/* Botón Añadir al Carrito */
+.btn-add-cart {
+  width: 100%;
+  background-color: transparent;
+  color: var(--clr-text-main, #1a1a1a);
+  border: 1px solid var(--clr-text-main, #1a1a1a);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body, "Jost", sans-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-add-cart:hover {
+  background-color: var(--clr-text-main, #1a1a1a);
+  color: #ffffff;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  .category-title {
+    font-size: 2.2rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .product-info {
+    padding: 1rem;
+  }
+
+  .product-title {
+    font-size: 1.1rem;
+  }
+
+  .btn-add-cart {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}

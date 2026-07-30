@@ -1,27 +1,267 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maquillaje</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maquillaje | KRISABELL</title>
+  <meta name="description"
+    content="Descubre la colección de maquillaje de KRISABELL: productos para labios, ojos y rostro diseñados para resaltar tu belleza natural.">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../style/style.css">
 </head>
+
 <body>
-    <h1>Maquillaje</h1>
 
- <section id="Labios">
-    <h2>Labios</h2>
-    ...
-</section>
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="..\\index.html" class="logo" aria-label="Krisabell – Inicio">
+        <img src="..\\img\\image.jpeg" alt="Logo de Krisabell" class="logo-img">
+      </a>
 
-<section id="Ojos">
-    <h2>Ojos</h2>
-    ...
-</section>
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <ul class="menu-list">
+          <li><a href="..\\index.html">Inicio</a></li>
+          <li>  
+            <a href="Maquillaje.html" class="active">Maquillaje</a>
+            <ul>
+              <li><a href="Maquillaje.html#Labios">Labios</a></li>
+              <li><a href="Maquillaje.html#Ojos">Ojos</a></li>
+              <li><a href="Maquillaje.html#Rostro">Rostro</a></li>
+            </ul>
+          </li>
+          <li><a href="Cuidadofacial.html">Cuidado Facial</a></li>
+          <li><a href="Accesorios.html">Accesorios</a></li>
+          <li><a href="Novedades.html">Novedades</a></li>
+          <li><a href="Ofertas.html">Ofertas</a></li>
+          <li><a href="Nosotros.html">Nosotros</a></li>
+        </ul>
 
-<section id="Rostro">
-    <h2>Rostro</h2>
-    ...
-</section>
+        <div class="header-actions">
+          <button type="button" class="icon-btn" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <line x1="21" y1="21" x2="16.5" y2="16.5" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </button>
+          <a href="Login.html" class="icon-btn" aria-label="Mi cuenta">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <path d="M4 20c1.5-4 4.7-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </a>
+          <a href="Carrito.html" class="icon-btn cart-btn" aria-label="Carrito de compras, 0 productos">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z" fill="none" stroke="currentColor"
+                stroke-width="1.6" />
+              <path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
 
+        <button type="button" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== CONTENIDO PRINCIPAL ===================== -->
+  <main id="main-content">
+    
+    <!-- Banner de Categoría -->
+    <section class="category-hero">
+      <h1 class="category-title">Maquillaje</h1>
+      <p class="category-subtitle">Encuentra los tonos y texturas perfectos para realzar tu belleza.</p>
+    </section>
+
+    <!-- SECCIÓN: LABIOS -->
+    <section id="Labios" class="catalog-section">
+      <div class="section-header">
+        <h2>Labios</h2>
+        <p>Labiales mate, brillos humectantes y delineadores de alta duración.</p>
+      </div>
+
+      <div class="product-grid">
+        <!-- Producto 1 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/labial-mate.jpg" alt="Labial Velour Velvet en tono Rosa Nude" class="product-img" loading="lazy">
+            <span class="product-tag">Más Vendido</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Labial Velour Velvet</h3>
+            <p class="product-shade">Tono 02 - Rosa Nude</p>
+            <p class="product-price">$350.00 MXN</p>
+            <button type="button" class="btn-add-cart" data-id="lab-01" data-name="Labial Velour Velvet" data-price="350">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Producto 2 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/gloss-brillo.jpg" alt="Gloss Cristal Hydra Tint" class="product-img" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Gloss Cristal Hydra Tint</h3>
+            <p class="product-shade">Tono Glow Peach</p>
+            <p class="product-price">$280.00 MXN</p>
+            <button type="button" class="btn-add-cart" data-id="lab-02" data-name="Gloss Cristal Hydra Tint" data-price="280">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: OJOS -->
+    <section id="Ojos" class="catalog-section">
+      <div class="section-header">
+        <h2>Ojos</h2>
+        <p>Paletas de sombras pigmetadas, máscaras y delineadores precisos.</p>
+      </div>
+
+      <div class="product-grid">
+        <!-- Producto 3 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/paleta-sombras.jpg" alt="Paleta de Sombras Golden Sunset" class="product-img" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Paleta Golden Sunset</h3>
+            <p class="product-shade">12 Tonos Cálidos</p>
+            <p class="product-price">$620.00 MXN</p>
+            <button type="button" class="btn-add-cart" data-id="ojo-01" data-name="Paleta Golden Sunset" data-price="620">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Producto 4 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/mascara-pestañas.jpg" alt="Máscara Lash Lift Effect" class="product-img" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Máscara Lash Lift Effect</h3>
+            <p class="product-shade">Negro Intenso - Water-resistant</p>
+            <p class="product-price">$310.00 MXN</p>
+            <button type="button" class="btn-add-cart" data-id="ojo-02" data-name="Máscara Lash Lift Effect" data-price="310">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: ROSTRO -->
+    <section id="Rostro" class="catalog-section">
+      <div class="section-header">
+        <h2>Rostro</h2>
+        <p>Bases de cobertura adaptable, iluminadores y rubores en crema.</p>
+      </div>
+
+      <div class="product-grid">
+        <!-- Producto 5 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/base-maquillaje.jpg" alt="Base Luminosa Silk Finish" class="product-img" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Base Luminosa Silk Finish</h3>
+            <p class="product-shade">Cobertura Media Modificable</p>
+            <p class="product-price">$540.00 MXN</p>
+            <button type="button" class="btn-add-cart" data-id="ros-01" data-name="Base Luminosa Silk Finish" data-price="540">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Producto 6 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/rubor-crema.jpg" alt="Rubor Soft Touch Blush" class="product-img" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Rubor Soft Touch Blush</h3>
+            <p class="product-shade">Tono Coral Bloom</p>
+            <p class="product-price">$290.00 MXN</p>
+            <button type="button" class="btn-add-cart" data-id="ros-02" data-name="Rubor Soft Touch Blush" data-price="290">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">
+          <span class="logo-word">KRISABELL</span>
+        </a>
+        <p class="footer-tagline">Belleza como forma de expresión y autocuidado.</p>
+        <ul class="social-list" aria-label="Redes sociales">
+          <li><a href="#" aria-label="Instagram">IG</a></li>
+          <li><a href="#" aria-label="TikTok">TT</a></li>
+          <li><a href="#" aria-label="Facebook">FB</a></li>
+        </ul>
+      </div>
+
+      <nav class="footer-nav" aria-label="Comprar">
+        <h3>Comprar</h3>
+        <ul>
+          <li><a href="Maquillaje.html">Maquillaje</a></li>
+          <li><a href="Cuidadofacial.html">Cuidado Facial</a></li>
+          <li><a href="Accesorios.html">Accesorios</a></li>
+          <li><a href="Novedades.html">Novedades</a></li>
+          <li><a href="Ofertas.html">Ofertas</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-nav" aria-label="Ayuda">
+        <h3>Ayuda</h3>
+        <ul>
+          <li><a href="Ayuda.html">Preguntas frecuentes</a></li>
+          <li><a href="Ayuda.html#envios">Envíos</a></li>
+          <li><a href="Ayuda.html#cambios">Cambios y devoluciones</a></li>
+          <li><a href="Ayuda.html#pagos">Medios de pago</a></li>
+          <li><a href="Contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-nav" aria-label="Krisabell">
+        <h3>Krisabell</h3>
+        <ul>
+          <li><a href="Nosotros.html">Nosotros</a></li>
+          <li><a href="Contacto.html">Contacto</a></li>
+          <li><a href="Ayuda.html#terminos">Términos y condiciones</a></li>
+          <li><a href="Ayuda.html#privacidad">Política de privacidad</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Krisabell. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuidado Facial | KRISABELL</title>
+  <meta name="description"
+    content="Descubre la línea de cuidado facial de KRISABELL. Limpiadores, sueros e hidratantes formulados para nutrir y proteger tu piel.">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo" aria-label="Krisabell – Inicio">
+        <img src="../img/image.jpeg" alt="Logo de Krisabell" class="logo-img">
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <ul class="menu-list">
+          <li><a href="../index.html">Inicio</a></li>
+          <li>
+            <a href="Maquillaje.html">Maquillaje</a>
+            <ul>
+              <li><a href="Maquillaje.html#Labios">Labios</a></li>
+              <li><a href="Maquillaje.html#Ojos">Ojos</a></li>
+              <li><a href="Maquillaje.html#Rostro">Rostro</a></li>
+            </ul>
+          </li>
+          <li><a href="Cuidadofacial.html" class="active">Cuidado Facial</a></li>
+          <li><a href="Accesorios.html">Accesorios</a></li>
+          <li><a href="Novedades.html">Novedades</a></li>
+          <li><a href="Ofertas.html">Ofertas</a></li>
+          <li><a href="Nosotros.html">Nosotros</a></li>
+        </ul>
+
+        <div class="header-actions">
+          <button type="button" class="icon-btn" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <line x1="21" y1="21" x2="16.5" y2="16.5" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </button>
+          <a href="Login.html" class="icon-btn" aria-label="Mi cuenta">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <path d="M4 20c1.5-4 4.7-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </a>
+          <a href="Carrito.html" class="icon-btn cart-btn" aria-label="Carrito de compras, 0 productos">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z" fill="none" stroke="currentColor"
+                stroke-width="1.6" />
+              <path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+
+        <button type="button" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== CONTENIDO PRINCIPAL ===================== -->
+  <main id="main-content">
+    
+    <!-- Banner de Categoría -->
+    <section class="category-hero">
+      <h1 class="category-title">Cuidado Facial</h1>
+      <p class="category-subtitle">Rutinas diseñadas para nutrir, hidratar y proteger tu piel todos los días.</p>
+    </section>
+
+    <!-- SECCIÓN: CUIDADO FACIAL -->
+    <section class="catalog-section">
+      <div class="section-header">
+        <h2>Skincare Esencial</h2>
+        <p>Fórmulas dermatológicamente probadas e ingredientes de alta calidad.</p>
+      </div>
+
+      <div class="product-grid">
+        <!-- Producto 1 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/serum-hialuronico.jpg" alt="Serum Hidratante Ácido Hialurónico" class="product-img" loading="lazy">
+            <span class="product-tag">Favorito</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Serum Hyaluron Booster</h3>
+            <p class="product-shade">Hidratación Intensa 30ml</p>
+            <p class="product-price">$480.00 MXN</p>
+            <button type="button" class="btn-add-cart" data-id="cf-01" data-name="Serum Hyaluron Booster" data-price="480">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Producto 2 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/limpiador-gel.jpg" alt="Gel Limpiador Botánico Gentle Cleanse" class="product-img" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Gentle Cleanse Gel</h3>
+            <p class="product-shade">Limpieza Suave 150ml</p>
+            <p class="product-price">$320.00 MXN</p>
+            <button type="button" class="btn-add-cart" data-id="cf-02" data-name="Gentle Cleanse Gel" data-price="320">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Producto 3 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/crema-hidratante.jpg" alt="Crema Nutritiva Velvet Moisture" class="product-img" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Velvet Moisture Cream</h3>
+            <p class="product-shade">Restauración y Nutrición 50g</p>
+            <p class="product-price">$590.00 MXN</p>
+            <button type="button" class="btn-add-cart" data-id="cf-03" data-name="Velvet Moisture Cream" data-price="590">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Producto 4 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="../img/contorno-ojos.jpg" alt="Contorno de Ojos Radiance Eye Cream" class="product-img" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Radiance Eye Cream</h3>
+            <p class="product-shade">Anti-fatiga e Iluminador 15ml</p>
+            <p class="product-price">$410.00 MXN</p>
+            <button type="button" class="btn-add-cart" data-id="cf-04" data-name="Radiance Eye Cream" data-price="410">
+              Añadir al Carrito
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">
+          <span class="logo-word">KRISABELL</span>
+        </a>
+        <p class="footer-tagline">Belleza como forma de expresión y autocuidado.</p>
+        <ul class="social-list" aria-label="Redes sociales">
+          <li><a href="#" aria-label="Instagram">IG</a></li>
+          <li><a href="#" aria-label="TikTok">TT</a></li>
+          <li><a href="#" aria-label="Facebook">FB</a></li>
+        </ul>
+      </div>
+
+      <nav class="footer-nav" aria-label="Comprar">
+        <h3>Comprar</h3>
+        <ul>
+          <li><a href="Maquillaje.html">Maquillaje</a></li>
+          <li><a href="Cuidadofacial.html">Cuidado Facial</a></li>
+          <li><a href="Accesorios.html">Accesorios</a></li>
+          <li><a href="Novedades.html">Novedades</a></li>
+          <li><a href="Ofertas.html">Ofertas</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-nav" aria-label="Ayuda">
+        <h3>Ayuda</h3>
+        <ul>
+          <li><a href="Ayuda.html">Preguntas frecuentes</a></li>
+          <li><a href="Ayuda.html#envios">Envíos</a></li>
+          <li><a href="Ayuda.html#cambios">Cambios y devoluciones</a></li>
+          <li><a href="Ayuda.html#pagos">Medios de pago</a></li>
+          <li><a href="Contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-nav" aria-label="Krisabell">
+        <h3>Krisabell</h3>
+        <ul>
+          <li><a href="Nosotros.html">Nosotros</a></li>
+          <li><a href="Contacto.html">Contacto</a></li>
+          <li><a href="Ayuda.html#terminos">Términos y condiciones</a></li>
+          <li><a href="Ayuda.html#privacidad">Política de privacidad</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Krisabell. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+
+</html>

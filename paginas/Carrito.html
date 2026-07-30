@@ -1,11 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito de Compras | KRISABELL</title>
+  <meta name="description"
+    content="Revisa y gestiona los productos seleccionados en tu carrito de compras de KRISABELL antes de finalizar tu pedido.">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../style/style.css">
 </head>
+
 <body>
-    <h1>Carrito</h1>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo" aria-label="Krisabell – Inicio">
+        <img src="../img/image.jpeg" alt="Logo de Krisabell" class="logo-img">
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <ul class="menu-list">
+          <li><a href="../index.html">Inicio</a></li>
+          <li>
+            <a href="Maquillaje.html">Maquillaje</a>
+            <ul>
+              <li><a href="Maquillaje.html#Labios">Labios</a></li>
+              <li><a href="Maquillaje.html#Ojos">Ojos</a></li>
+              <li><a href="Maquillaje.html#Rostro">Rostro</a></li>
+            </ul>
+          </li>
+          <li><a href="Cuidadofacial.html">Cuidado Facial</a></li>
+          <li><a href="Accesorios.html">Accesorios</a></li>
+          <li><a href="Novedades.html">Novedades</a></li>
+          <li><a href="Ofertas.html">Ofertas</a></li>
+          <li><a href="Nosotros.html">Nosotros</a></li>
+        </ul>
+
+        <div class="header-actions">
+          <button type="button" class="icon-btn" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <line x1="21" y1="21" x2="16.5" y2="16.5" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </button>
+          <a href="Login.html" class="icon-btn" aria-label="Mi cuenta">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <path d="M4 20c1.5-4 4.7-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </a>
+          <a href="Carrito.html" class="icon-btn cart-btn" aria-label="Carrito de compras, 0 productos">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z" fill="none" stroke="currentColor"
+                stroke-width="1.6" />
+              <path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+
+        <button type="button" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== CONTENIDO PRINCIPAL ===================== -->
+  <main id="main-content">
+    
+    <section class="category-hero">
+      <h1 class="category-title">Tu Carrito</h1>
+      <p class="category-subtitle">Revisa tus productos seleccionados antes de finalizar el pedido.</p>
+    </section>
+
+    <section class="cart-section">
+      <div class="cart-container">
+        
+        <!-- Tabla de Productos -->
+        <div class="cart-items-wrapper">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="cart-table-body">
+              <!-- Los elementos se renderizan dinámicamente desde JavaScript -->
+            </tbody>
+          </table>
+
+          <div id="cart-empty-message" class="cart-empty" style="display: none;">
+            <p>Tu carrito está actualmente vacío.</p>
+            <a href="Maquillaje.html" class="btn-continue-shopping">Descubrir productos</a>
+          </div>
+        </div>
+
+        <!-- Resumen de Pedido -->
+        <div class="cart-summary">
+          <h2>Resumen del Pedido</h2>
+          
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">$0.00 MXN</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Envío</span>
+            <span id="cart-shipping">Calculado en el checkout</span>
+          </div>
+
+          <div class="summary-row total-row">
+            <span>Total</span>
+            <span id="cart-total">$0.00 MXN</span>
+          </div>
+
+          <button type="button" class="btn-checkout" id="btn-checkout">
+            Proceder al Pago
+          </button>
+
+          <a href="Maquillaje.html" class="link-keep-shopping">Seguir comprando</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">
+          <span class="logo-word">KRISABELL</span>
+        </a>
+        <p class="footer-tagline">Belleza como forma de expresión y autocuidado.</p>
+        <ul class="social-list" aria-label="Redes sociales">
+          <li><a href="#" aria-label="Instagram">IG</a></li>
+          <li><a href="#" aria-label="TikTok">TT</a></li>
+          <li><a href="#" aria-label="Facebook">FB</a></li>
+        </ul>
+      </div>
+
+      <nav class="footer-nav" aria-label="Comprar">
+        <h3>Comprar</h3>
+        <ul>
+          <li><a href="Maquillaje.html">Maquillaje</a></li>
+          <li><a href="Cuidadofacial.html">Cuidado Facial</a></li>
+          <li><a href="Accesorios.html">Accesorios</a></li>
+          <li><a href="Novedades.html">Novedades</a></li>
+          <li><a href="Ofertas.html">Ofertas</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-nav" aria-label="Ayuda">
+        <h3>Ayuda</h3>
+        <ul>
+          <li><a href="Ayuda.html">Preguntas frecuentes</a></li>
+          <li><a href="Ayuda.html#envios">Envíos</a></li>
+          <li><a href="Ayuda.html#cambios">Cambios y devoluciones</a></li>
+          <li><a href="Ayuda.html#pagos">Medios de pago</a></li>
+          <li><a href="Contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-nav" aria-label="Krisabell">
+        <h3>Krisabell</h3>
+        <ul>
+          <li><a href="Nosotros.html">Nosotros</a></li>
+          <li><a href="Contacto.html">Contacto</a></li>
+          <li><a href="Ayuda.html#terminos">Términos y condiciones</a></li>
+          <li><a href="Ayuda.html#privacidad">Política de privacidad</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Krisabell. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
 </body>
+
 </html>
