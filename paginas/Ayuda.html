@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayuda | KRISABELL</title>
+  <meta name="description"
+    content="Encuentra respuestas a tus preguntas sobre productos, envíos, devoluciones y más en la sección de ayuda de KRISABELL.">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="..\\index.html" class="logo" aria-label="Krisabell – Inicio">
+        <img src="..\\img\\image.jpeg" alt="Logo de Krisabell" class="logo-img">
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <ul class="menu-list">
+          <li><a href="..\\index.html">Inicio</a></li>
+          <li>  
+            <a href="Maquillaje.html" class="active">Maquillaje</a>
+            <ul>
+              <li><a href="Maquillaje.html#Labios">Labios</a></li>
+              <li><a href="Maquillaje.html#Ojos">Ojos</a></li>
+              <li><a href="Maquillaje.html#Rostro">Rostro</a></li>
+            </ul>
+          </li>
+          <li><a href="Cuidadofacial.html">Cuidado Facial</a></li>
+          <li><a href="Accesorios.html">Accesorios</a></li>
+          <li><a href="Novedades.html">Novedades</a></li>
+          <li><a href="Ofertas.html">Ofertas</a></li>
+          <li><a href="Nosotros.html">Nosotros</a></li>
+        </ul>
+
+        <div class="header-actions">
+          <button type="button" class="icon-btn" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <line x1="21" y1="21" x2="16.5" y2="16.5" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </button>
+          <a href="Login.html" class="icon-btn" aria-label="Mi cuenta">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <path d="M4 20c1.5-4 4.7-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </a>
+          <a href="Carrito.html" class="icon-btn cart-btn" aria-label="Carrito de compras, 0 productos">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z" fill="none" stroke="currentColor"
+                stroke-width="1.6" />
+              <path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+
+        <button type="button" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
