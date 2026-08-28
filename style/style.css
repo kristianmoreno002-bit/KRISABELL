@@ -6,8 +6,8 @@
   --font-body: 'Jost', sans-serif;
 
   /* Paleta de colores */
-  --clr-bg: #0c0c12;          /* Blanco cálido/crema */
-  --clr-surface: #09090e;     /* Blanco puro */
+  --clr-bg: #12100c;          /* Blanco cálido/crema */
+  --clr-surface: #242116;     /* Blanco puro */
   --clr-text-main: #dea323;   /* Oscuro neutro */
   --clr-text-muted: #fefefe;  /* Gris suave */
   --clr-accent: #dea323;      /* Dorado / Champán */
@@ -55,7 +55,7 @@ ul {
 .site-header {
   position: sticky;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: #0e0b07f2;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--clr-border);
   z-index: 1000;
@@ -299,7 +299,7 @@ ul {
    5. FOOTER
    ========================================================================== */
 .site-footer {
-  background-color: var(--clr-surface);
+  background-color: var(--clr-bg);
   border-top: 1px solid var(--clr-border);
   padding-top: 4rem;
 }
