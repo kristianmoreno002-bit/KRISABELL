@@ -6,14 +6,14 @@
   --font-body: 'Jost', sans-serif;
 
   /* Paleta de colores */
-  --clr-bg: #090702;          /* Blanco cálido/crema */
-  --clr-surface: #181405;     /* Blanco puro */
-  --clr-text-main: #dea323;   /* Oscuro neutro */
-  --clr-text-muted: #fefefe;  /* Gris suave */
-  --clr-accent: #b7801b;      /* Dorado / Champán */
-  --clr-accent-soft: #F4EAE1; /* Beige suave */
-  --clr-rose: #E8D5C8;        /* Rosa neutro */
-  --clr-border: #E8E2D9;      /* Borde sutil */
+  --clr-bg: #090702;          
+  --clr-surface: #181405;     
+  --clr-text-main: #d7aa4f;   
+  --clr-text-muted: #fefefe;  
+  --clr-accent: #bd8c30;      
+  --clr-accent-soft: #F4EAE1; 
+  --clr-rose: #E8D5C8;       
+  --clr-border: #E8E2D9;      
 
   --header-height: 80px;
   --max-width: 1200px;
@@ -460,7 +460,21 @@ ul {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
+  main.principio {
+    background-position: top center;
+    background-attachment: scroll;
+  }
+
+  .garantias {
+    max-width: 100%;
+    margin: 4rem auto 3rem;
+    padding: 0 1.5rem;
+  }
 }
+
+
+
 /* ==========================================================================
    VISTA DE MAQUILLAJE (Maquillaje.html)
    ========================================================================== */
@@ -2037,4 +2051,11 @@ ul {
   text-align: center;
   color: var(--clr-text-muted);
   font-size: 0.9rem;
+}
+
+p.nosotros {
+  color: var(--clr-text-main);
+
+
+
 }

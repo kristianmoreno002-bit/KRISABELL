@@ -400,5 +400,11 @@ function initSearch() {
    ========================================================================== */
 function formatPrice(num) {
   const value = typeof num === 'number' && !isNaN(num) ? num : 0;
-  return `$${value.toFixed(2)} MXN`;
+  const formatted = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(value);
+  return formatted;
 }
