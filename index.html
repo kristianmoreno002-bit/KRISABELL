@@ -18,6 +18,8 @@
   <!-- Estilos -->
   <link rel="stylesheet" href="style/style.css">
 
+  <link rel="icon" type="image/png" href="img/logo.png">
+
 </head>
 
 <body>
@@ -76,11 +78,19 @@
     </div>
   </header>
 
-  <main id="main-content">
+  <main class="principio" id="main-content">
     <section class="hero-section">
       <h1 class="belleza">Resalta tu belleza.</h1>
       <p class="mejor_version">Sé tu mejor versión.</p>
-    </section>
+    
+     <button class="btn-hero" onclick="window.location.href='paginas/Maquillaje.html'">
+      Ver Colección 
+    
+    </button>
+   
+  </section>
+
+   
 
     <div class="garantias">
       <!-- Compromisos -->
@@ -213,6 +223,22 @@
       <p>&copy; 2026 Krisabell. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+    <!-- ===================== OVERLAY DE BÚSQUEDA ===================== -->
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Buscar productos">
+    <div class="search-panel">
+      <div class="search-input-wrapper">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="search-panel-icon">
+          <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6" />
+          <line x1="21" y1="21" x2="16.5" y2="16.5" stroke="currentColor" stroke-width="1.6" />
+        </svg>
+        <input type="text" id="search-input" placeholder="Buscar productos..." autocomplete="off">
+        <button type="button" id="search-close" aria-label="Cerrar búsqueda">&times;</button>
+      </div>
+      <ul class="search-results" id="search-results"></ul>
+      <p class="search-empty" id="search-empty" style="display:none;">No se encontraron productos.</p>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

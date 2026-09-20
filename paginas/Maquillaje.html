@@ -17,6 +17,9 @@
 
   <!-- Estilos -->
   <link rel="stylesheet" href="../style/style.css">
+
+  <link rel="icon" type="image/png" href="../img/logo.png">
+
 </head>
 
 <body>
@@ -24,14 +27,14 @@
   <!-- ===================== HEADER ===================== -->
   <header class="site-header">
     <div class="header-inner">
-      <a href="..\\index.html" class="logo" aria-label="Krisabell – Inicio">
-        <img src="..\\img\\logo.png" alt="Logo de Krisabell" class="logo-img">
+      <a href="../index.html" class="logo" aria-label="Krisabell – Inicio">
+        <img src="../img/logo.png" alt="Logo de Krisabell" class="logo-img">
       </a>
 
       <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
         <ul class="menu-list">
-          <li><a href="..\\index.html">Inicio</a></li>
-          <li>  
+          <li><a href="../index.html">Inicio</a></li>
+          <li>
             <a href="Maquillaje.html" class="active">Maquillaje</a>
             <ul>
               <li><a href="Maquillaje.html#Labios">Labios</a></li>
@@ -78,7 +81,7 @@
 
   <!-- ===================== CONTENIDO PRINCIPAL ===================== -->
   <main id="main-content">
-    
+
     <!-- Banner de Categoría -->
     <section class="category-hero">
       <h1 class="category-title">Maquillaje</h1>
@@ -96,14 +99,16 @@
         <!-- Producto 1 -->
         <article class="product-card">
           <div class="product-image-container">
-            <img src="../img/...jpg" alt="..." class="product-img" loading="lazy">
+            <img src="../img/shopping.webp" loading="lazy" alt="Labial Color Riche tono nude"
+              class="product-img">
             <span class="product-tag">Más Vendido</span>
           </div>
           <div class="product-info">
-            <h3 class="product-title">......</h3>
-            <p class="product-shade">...</p>
-            <p class="product-price">...</p>
-            <button type="button" class="btn-add-cart" data-id="lab-01" data-name="......" data-price="...">
+            <h3 class="product-title">Color Riche Labial</h3>
+            <p class="product-shade">Tono: Nude Rosado</p>
+            <p class="product-price">$70.00 MXN</p>
+            <button type="button" class="btn-add-cart" data-id="lab-01" data-name="Color Riche Labial"
+              data-price="70">
               Añadir al Carrito
             </button>
           </div>
@@ -112,7 +117,7 @@
         <!-- Producto 2 -->
         <article class="product-card">
           <div class="product-image-container">
-            <img src="../img/...jpg" alt="..." class="product-img" loading="lazy">
+            <img src="../img/...jpg" loading="lazy" alt="..." class="product-img">
           </div>
           <div class="product-info">
             <h3 class="product-title">......</h3>
@@ -137,7 +142,7 @@
         <!-- Producto 3 -->
         <article class="product-card">
           <div class="product-image-container">
-            <img src="../img/...jpg" alt="..." class="product-img" loading="lazy">
+            <img src="../img/...jpg" loading="lazy" alt="..." class="product-img">
           </div>
           <div class="product-info">
             <h3 class="product-title">......</h3>
@@ -152,7 +157,7 @@
         <!-- Producto 4 -->
         <article class="product-card">
           <div class="product-image-container">
-            <img src="../img/...jpg" alt="..." class="product-img" loading="lazy">
+            <img src="../img/...jpg" loading="lazy" alt="..." class="product-img">
           </div>
           <div class="product-info">
             <h3 class="product-title">......</h3>
@@ -177,7 +182,7 @@
         <!-- Producto 5 -->
         <article class="product-card">
           <div class="product-image-container">
-            <img src="../img/...jpg" alt="..." class="product-img" loading="lazy">
+            <img src="../img/...jpg" loading="lazy" alt="..." class="product-img">
           </div>
           <div class="product-info">
             <h3 class="product-title">......</h3>
@@ -192,7 +197,7 @@
         <!-- Producto 6 -->
         <article class="product-card">
           <div class="product-image-container">
-            <img src="../img/...jpg" alt="..." class="product-img" loading="lazy">
+            <img src="../img/...jpg" loading="lazy" alt="..." class="product-img">
           </div>
           <div class="product-info">
             <h3 class="product-title">......</h3>
@@ -260,6 +265,22 @@
       <p>&copy; 2026 Krisabell. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+  <!-- ===================== OVERLAY DE BÚSQUEDA ===================== -->
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Buscar productos">
+    <div class="search-panel">
+      <div class="search-input-wrapper">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="search-panel-icon">
+          <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6" />
+          <line x1="21" y1="21" x2="16.5" y2="16.5" stroke="currentColor" stroke-width="1.6" />
+        </svg>
+        <input type="text" id="search-input" placeholder="Buscar productos..." autocomplete="off">
+        <button type="button" id="search-close" aria-label="Cerrar búsqueda">&times;</button>
+      </div>
+      <ul class="search-results" id="search-results"></ul>
+      <p class="search-empty" id="search-empty" style="display:none;">No se encontraron productos.</p>
+    </div>
+  </div>
 
   <script src="../script.js"></script>
 </body>
