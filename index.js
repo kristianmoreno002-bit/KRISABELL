@@ -86,6 +86,10 @@ function createApp(options = {}) {
     res.json({ status: 'ok' });
   });
 
+  app.get('/', (req, res) => {
+  res.redirect('https://kristianmoreno002-bit.github.io/KRISABELL/');
+});
+
   app.get('/api/products', async (req, res) => {
     res.set('Cache-Control', 'no-store').json(await db.listProducts());
   });
