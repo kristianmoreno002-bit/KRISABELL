@@ -2,6 +2,48 @@
  * KRISABELL - Funcionalidades principales
  */
 
+const localHosts = ['localhost', '127.0.0.1'];
+const configuredApiUrl = window.KRISABELL_API_URL ||
+  (localHosts.includes(window.location.hostname) ? `http://${window.location.hostname}:3001` : '');
+const API_BASE_URL = configuredApiUrl.replace(/\/+$/, '');
+
+window.KRISABELL_API = {
+  baseUrl: API_BASE_URL,
+  get configured() {
+    return Boolean(API_BASE_URL);
+  },
+  async request(path, options = {}) {
+    if (!API_BASE_URL) {
+      throw new Error('Configura la URL de la API en data/api-config.js.');
+    }
+
+    const headers = { ...options.headers };
+    if (options.body && !headers['Content-Type']) {
+      headers['Content-Type'] = 'application/json';
+    }
+
+    const response = await fetch(`${API_BASE_URL}${path}`, {
+      ...options,
+      headers,
+      credentials: 'include'
+    });
+    const contentType = response.headers.get('content-type') || '';
+    const payload = response.status === 204
+      ? null
+      : contentType.includes('application/json')
+        ? await response.json()
+        : null;
+
+    if (!response.ok) {
+      throw new Error(payload && payload.error ? payload.error : `Error del servidor (${response.status}).`);
+    }
+    if (response.status !== 204 && payload === null) {
+      throw new Error('El servidor devolvió una respuesta inválida.');
+    }
+    return payload;
+  }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   // Inicializar componentes
   initMobileMenu();
@@ -10,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCartPage();
   initContactForm();
   initSearch();
+  initRemoteCatalog();
 });
 
 /* ==========================================================================
@@ -186,6 +229,11 @@ function initAuthTabs() {
   const formRegister = document.getElementById('form-register');
 
   if (!tabLogin || !tabRegister) return;
+  const tabs = document.querySelector('.auth-tabs');
+  const accountPanel = document.getElementById('customer-account');
+  const customerIdentity = document.getElementById('customer-identity');
+  const authStatus = document.getElementById('auth-status');
+  const logoutButton = document.getElementById('customer-logout');
 
   function activateTab(tabToShow, tabToHide, formToShow, formToHide) {
     tabToShow.classList.add('active');
@@ -199,13 +247,95 @@ function initAuthTabs() {
     formToHide.classList.remove('active');
   }
 
+  function showStatus(message, state = 'info') {
+    authStatus.textContent = message;
+    authStatus.dataset.state = state;
+    authStatus.hidden = !message;
+  }
+
+  function showAccount(user) {
+    tabs.hidden = true;
+    formLogin.style.display = 'none';
+    formRegister.style.display = 'none';
+    accountPanel.hidden = false;
+    customerIdentity.textContent = `${user.name} · ${user.email}`;
+  }
+
+  function showForms() {
+    accountPanel.hidden = true;
+    tabs.hidden = false;
+    activateTab(tabLogin, tabRegister, formLogin, formRegister);
+  }
+
+  async function submitAuthForm(form, path, includeRemember = false) {
+    const submit = form.querySelector('[type="submit"]');
+    submit.disabled = true;
+    showStatus('Procesando...', 'info');
+
+    try {
+      const fields = Object.fromEntries(new FormData(form).entries());
+      if (includeRemember) {
+        fields.remember = form.elements.remember.checked;
+      }
+      const result = await window.KRISABELL_API.request(path, {
+        method: 'POST',
+        body: JSON.stringify(fields)
+      });
+      form.reset();
+      showAccount(result.user);
+      showStatus('Sesión iniciada.', 'success');
+    } catch (error) {
+      showStatus(error.message, 'error');
+    } finally {
+      submit.disabled = false;
+    }
+  }
+
   tabLogin.addEventListener('click', () => {
     activateTab(tabLogin, tabRegister, formLogin, formRegister);
+    showStatus('');
   });
 
   tabRegister.addEventListener('click', () => {
     activateTab(tabRegister, tabLogin, formRegister, formLogin);
+    showStatus('');
   });
+
+  formLogin.addEventListener('submit', event => {
+    event.preventDefault();
+    submitAuthForm(formLogin, '/api/auth/login', true);
+  });
+
+  formRegister.addEventListener('submit', event => {
+    event.preventDefault();
+    submitAuthForm(formRegister, '/api/auth/register');
+  });
+
+  logoutButton.addEventListener('click', async () => {
+    logoutButton.disabled = true;
+    try {
+      await window.KRISABELL_API.request('/api/auth/logout', { method: 'POST' });
+      showForms();
+      showStatus('Sesión cerrada.', 'success');
+    } catch (error) {
+      showStatus(error.message, 'error');
+    } finally {
+      logoutButton.disabled = false;
+    }
+  });
+
+  if (!window.KRISABELL_API.configured) {
+    showStatus('El registro y el inicio de sesión estarán disponibles al conectar la API.', 'error');
+    return;
+  }
+
+  window.KRISABELL_API.request('/api/auth/session')
+    .then(session => showAccount(session.user))
+    .catch(error => {
+      if (error.message !== 'Inicia sesión para continuar.') {
+        showStatus(error.message, 'error');
+      }
+    });
 }
 
 /* ==========================================================================
@@ -215,10 +345,31 @@ function initContactForm() {
   const form = document.getElementById('form-contacto');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  const confirmation = document.getElementById('contacto-confirmacion');
+  const submitButton = form.querySelector('[type="submit"]');
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    document.getElementById('contacto-confirmacion').style.display = 'block';
-    form.reset();
+    confirmation.style.display = 'block';
+    confirmation.dataset.state = 'loading';
+    confirmation.textContent = 'Enviando tu mensaje...';
+    submitButton.disabled = true;
+
+    try {
+      const formData = Object.fromEntries(new FormData(form).entries());
+      const result = await window.KRISABELL_API.request('/api/contact', {
+        method: 'POST',
+        body: JSON.stringify(formData)
+      });
+      confirmation.dataset.state = 'success';
+      confirmation.textContent = result.message;
+      form.reset();
+    } catch (error) {
+      confirmation.dataset.state = 'error';
+      confirmation.textContent = error.message;
+    } finally {
+      submitButton.disabled = false;
+    }
   });
 }
 
@@ -256,17 +407,28 @@ function renderCartPage() {
       subtotal += itemSubtotal;
 
       const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${item.name}</td>
-        <td>${formatPrice(item.price)}</td>
-        <td>
-          <input type="number" class="cart-qty-input" min="1" value="${item.quantity}" data-id="${item.id}">
-        </td>
-        <td>${formatPrice(itemSubtotal)}</td>
-        <td>
-          <button type="button" class="btn-remove-item" data-id="${item.id}">Eliminar</button>
-        </td>
-      `;
+      const nameCell = document.createElement('td');
+      nameCell.textContent = item.name;
+      const priceCell = document.createElement('td');
+      priceCell.textContent = formatPrice(item.price);
+      const quantityCell = document.createElement('td');
+      const quantityInput = document.createElement('input');
+      quantityInput.type = 'number';
+      quantityInput.className = 'cart-qty-input';
+      quantityInput.min = '1';
+      quantityInput.value = String(item.quantity);
+      quantityInput.dataset.id = item.id;
+      quantityCell.appendChild(quantityInput);
+      const subtotalCell = document.createElement('td');
+      subtotalCell.textContent = formatPrice(itemSubtotal);
+      const actionsCell = document.createElement('td');
+      const removeButton = document.createElement('button');
+      removeButton.type = 'button';
+      removeButton.className = 'btn-remove-item';
+      removeButton.dataset.id = item.id;
+      removeButton.textContent = 'Eliminar';
+      actionsCell.appendChild(removeButton);
+      row.append(nameCell, priceCell, quantityCell, subtotalCell, actionsCell);
       tableBody.appendChild(row);
     });
 
@@ -353,7 +515,14 @@ function initSearch() {
       return;
     }
 
-    const matches = searchIndex.filter(product =>
+    const products = window.KRISABELL_DATA
+      ? window.KRISABELL_DATA.PRODUCTOS.map(product => ({
+        name: product.nombre,
+        category: `${product.categoria} · ${product.subcategoria}`,
+        url: product.url
+      }))
+      : searchIndex;
+    const matches = products.filter(product =>
       product.name.toLowerCase().includes(query.toLowerCase()) ||
       product.category.toLowerCase().includes(query.toLowerCase())
     );
@@ -367,12 +536,16 @@ function initSearch() {
 
     matches.forEach(product => {
       const li = document.createElement('li');
-      li.innerHTML = `
-        <a href="${basePath}${product.url}">
-          <span class="search-result-name">${product.name}</span>
-          <span class="search-result-category">${product.category}</span>
-        </a>
-      `;
+      const link = document.createElement('a');
+      link.href = `${basePath}${product.url}`;
+      const name = document.createElement('span');
+      name.className = 'search-result-name';
+      name.textContent = product.name;
+      const category = document.createElement('span');
+      category.className = 'search-result-category';
+      category.textContent = product.category;
+      link.append(name, category);
+      li.appendChild(link);
       resultsList.appendChild(li);
     });
   }
@@ -393,6 +566,125 @@ function initSearch() {
   input.addEventListener('input', (e) => {
     renderResults(e.target.value);
   });
+}
+
+async function initRemoteCatalog() {
+  const pageName = window.location.pathname.split('/').pop().toLowerCase();
+  const categoryByPage = {
+    'maquillaje.html': 'Maquillaje',
+    'cuidadofacial.html': 'Cuidado Facial',
+    'accesorios.html': 'Accesorios',
+    'novedades.html': 'Novedades',
+    'ofertas.html': 'Ofertas'
+  };
+  const category = categoryByPage[pageName];
+  if (!category || !window.KRISABELL_API.configured) return;
+
+  try {
+    const products = await window.KRISABELL_API.request('/api/products');
+    if (!Array.isArray(products)) {
+      throw new Error('El catálogo recibido no tiene el formato esperado.');
+    }
+
+    const catalog = window.KRISABELL_DATA && window.KRISABELL_DATA.PRODUCTOS;
+    if (Array.isArray(catalog)) {
+      catalog.splice(0, catalog.length, ...products);
+    }
+
+    const pageProducts = products.filter(product => product.categoria === category);
+    if (category === 'Maquillaje') {
+      const gridsBySubcategory = {
+        Labios: document.querySelector('#Labios .product-grid'),
+        Ojos: document.querySelector('#Ojos .product-grid'),
+        Rostro: document.querySelector('#Rostro .product-grid')
+      };
+
+      Object.entries(gridsBySubcategory).forEach(([subcategory, grid]) => {
+        if (grid) {
+          renderProducts(grid, pageProducts.filter(product => product.subcategoria === subcategory));
+        }
+      });
+      return;
+    }
+
+    const grid = document.querySelector('.product-grid');
+    if (grid) {
+      renderProducts(grid, pageProducts);
+    }
+  } catch (error) {
+    console.error('No se pudo actualizar el catálogo desde la API:', error);
+    const section = document.querySelector('.catalog-section');
+    if (section) {
+      const notice = document.createElement('p');
+      notice.className = 'catalog-api-error';
+      notice.setAttribute('role', 'status');
+      notice.textContent = 'No se pudo actualizar el catálogo desde el servidor. Se muestran los productos disponibles en esta página.';
+      section.prepend(notice);
+    }
+  }
+}
+
+function renderProducts(grid, products) {
+  if (products.length === 0) {
+    grid.replaceChildren();
+    const emptyMessage = document.createElement('p');
+    emptyMessage.textContent = 'No hay productos disponibles en esta categoría.';
+    grid.appendChild(emptyMessage);
+    return;
+  }
+
+  const existingCards = new Map(
+    Array.from(grid.querySelectorAll('.btn-add-cart[data-id]'))
+      .map(button => [button.dataset.id, button.closest('.product-card')])
+  );
+  const cards = products.map(product => {
+    const existingCard = existingCards.get(product.id);
+    if (existingCard) {
+      existingCard.querySelector('.product-title').textContent = product.nombre;
+      existingCard.querySelector('.product-shade').textContent = product.descripcion;
+      existingCard.querySelector('.product-price').textContent = formatPrice(product.precio);
+      const addButton = existingCard.querySelector('.btn-add-cart');
+      addButton.dataset.name = product.nombre;
+      addButton.dataset.price = String(product.precio);
+      return existingCard;
+    }
+
+    const card = document.createElement('article');
+    card.className = 'product-card';
+
+    const imageContainer = document.createElement('div');
+    imageContainer.className = 'product-image-container';
+    const image = document.createElement('img');
+    image.src = '../img/logo.png';
+    image.alt = product.nombre;
+    image.loading = 'lazy';
+    image.className = 'product-img';
+    imageContainer.appendChild(image);
+
+    const info = document.createElement('div');
+    info.className = 'product-info';
+    const title = document.createElement('h3');
+    title.className = 'product-title';
+    title.textContent = product.nombre;
+    const description = document.createElement('p');
+    description.className = 'product-shade';
+    description.textContent = product.descripcion;
+    const price = document.createElement('p');
+    price.className = 'product-price';
+    price.textContent = formatPrice(product.precio);
+    const addButton = document.createElement('button');
+    addButton.type = 'button';
+    addButton.className = 'btn-add-cart';
+    addButton.dataset.id = product.id;
+    addButton.dataset.name = product.nombre;
+    addButton.dataset.price = String(product.precio);
+    addButton.textContent = 'Añadir al Carrito';
+
+    info.append(title, description, price, addButton);
+    card.append(imageContainer, info);
+    return card;
+  });
+  grid.replaceChildren(...cards);
 }
 
 /* ==========================================================================

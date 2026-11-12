@@ -1,0 +1,218 @@
+/* ==========================================================================
+   KRISABELL · Chatbot "Bell"
+   Usa la misma paleta y tipografías del sitio (negro cálido + dorado).
+   Todos los selectores empiezan por .kb- para no chocar con style.css
+   ========================================================================== */
+.kb-launcher,
+.kb-window {
+  --kb-bg: #090702;
+  --kb-surface: #181405;
+  --kb-surface-2: #231d08;
+  --kb-gold: #d7aa4f;
+  --kb-gold-deep: #bd8c30;
+  --kb-text: #f3ecdc;
+  --kb-muted: #b9ad8f;
+  --kb-border: rgba(215, 170, 79, 0.28);
+  font-family: 'Jost', system-ui, sans-serif;
+}
+
+/* ---------- Botón flotante ---------- */
+.kb-launcher {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 1px solid var(--kb-gold);
+  background: var(--kb-bg);
+  color: var(--kb-gold);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 4px rgba(215, 170, 79, 0.12);
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+.kb-launcher svg { width: 28px; height: 28px; }
+.kb-launcher:hover { transform: translateY(-2px); background: var(--kb-gold); color: var(--kb-bg); }
+.kb-launcher:focus-visible,
+.kb-window button:focus-visible,
+.kb-window a:focus-visible,
+.kb-input:focus-visible { outline: 2px solid var(--kb-gold); outline-offset: 2px; }
+
+/* ---------- Ventana ---------- */
+.kb-window {
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  z-index: 1001;
+  width: 370px;
+  max-width: calc(100vw - 24px);
+  height: 540px;
+  max-height: calc(100vh - 110px);
+  display: flex;
+  flex-direction: column;
+  background: var(--kb-bg);
+  color: var(--kb-text);
+  border: 1px solid var(--kb-border);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+  animation: kb-in 0.22s ease-out;
+}
+.kb-window[hidden] { display: none; }
+@keyframes kb-in { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+
+/* ---------- Cabecera ---------- */
+.kb-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 14px 14px 16px;
+  background: linear-gradient(180deg, var(--kb-surface-2), var(--kb-surface));
+  border-bottom: 1px solid var(--kb-border);
+}
+.kb-avatar {
+  width: 38px; height: 38px; flex: none;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.5rem; font-weight: 600;
+  color: var(--kb-bg);
+  background: linear-gradient(135deg, #f0cf85, var(--kb-gold-deep));
+}
+.kb-header-info { flex: 1; display: flex; flex-direction: column; line-height: 1.2; }
+.kb-header-info strong {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.2rem; font-weight: 600; letter-spacing: 0.04em; color: var(--kb-gold);
+}
+.kb-header-info small { color: var(--kb-muted); font-size: 0.75rem; }
+.kb-icon-btn {
+  width: 32px; height: 32px; flex: none;
+  border: 0; border-radius: 8px;
+  background: transparent; color: var(--kb-muted);
+  font-size: 1.3rem; line-height: 1; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.kb-icon-btn:hover { background: rgba(215, 170, 79, 0.15); color: var(--kb-gold); }
+
+/* ---------- Mensajes ---------- */
+.kb-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--kb-border) transparent;
+}
+.kb-msg {
+  max-width: 86%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.kb-msg p { margin: 0; white-space: pre-line; }
+.kb-bot {
+  align-self: flex-start;
+  background: var(--kb-surface-2);
+  border: 1px solid var(--kb-border);
+  border-bottom-left-radius: 4px;
+}
+.kb-user {
+  align-self: flex-end;
+  background: var(--kb-gold);
+  color: var(--kb-bg);
+  font-weight: 500;
+  border-bottom-right-radius: 4px;
+}
+.kb-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.kb-link {
+  display: inline-block;
+  padding: 5px 11px;
+  border: 1px solid var(--kb-gold);
+  border-radius: 999px;
+  color: var(--kb-gold);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.kb-link:hover { background: var(--kb-gold); color: var(--kb-bg); }
+
+/* Indicador "escribiendo…" */
+.kb-typing { display: flex; gap: 4px; padding: 14px 16px; }
+.kb-typing span {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--kb-gold);
+  animation: kb-dot 1s infinite ease-in-out;
+}
+.kb-typing span:nth-child(2) { animation-delay: 0.15s; }
+.kb-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes kb-dot { 0%, 80%, 100% { opacity: 0.25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+
+/* ---------- Sugerencias ---------- */
+.kb-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 0 16px 10px;
+}
+.kb-chips:empty { display: none; }
+.kb-chip {
+  padding: 6px 12px;
+  border: 1px solid var(--kb-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--kb-text);
+  font: inherit; font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.kb-chip:hover { border-color: var(--kb-gold); color: var(--kb-gold); background: rgba(215, 170, 79, 0.08); }
+
+/* ---------- Formulario ---------- */
+.kb-form {
+  display: flex; gap: 8px;
+  padding: 12px;
+  border-top: 1px solid var(--kb-border);
+  background: var(--kb-surface);
+}
+.kb-input {
+  flex: 1; min-width: 0;
+  padding: 10px 14px;
+  border: 1px solid var(--kb-border);
+  border-radius: 999px;
+  background: var(--kb-bg);
+  color: var(--kb-text);
+  font: inherit; font-size: 16px;   /* 16px evita el zoom automático en iOS */
+}
+.kb-input::placeholder { color: var(--kb-muted); }
+.kb-input:disabled { opacity: 0.6; }
+.kb-send {
+  padding: 0 18px;
+  border: 0; border-radius: 999px;
+  background: var(--kb-gold); color: var(--kb-bg);
+  font: inherit; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.kb-send:hover { background: #f0cf85; }
+
+/* ---------- Móvil: ventana casi a pantalla completa ---------- */
+@media (max-width: 520px) {
+  .kb-window {
+    right: 0; left: 0; bottom: 0;
+    width: 100%; max-width: 100%;
+    height: 85vh; max-height: 85dvh;
+    border-radius: 16px 16px 0 0;
+  }
+  .kb-launcher { right: 14px; bottom: 14px; }
+  .kb-launcher.kb-hidden-mobile { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kb-window, .kb-typing span { animation: none; }
+  .kb-launcher { transition: none; }
+}

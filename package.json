@@ -1,0 +1,30 @@
+{
+  "name": "proyecto_jovenes_creativos",
+  "version": "1.0.0",
+  "description": "KRISABELL tienda digital de productos de belleza.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kristianmoreno002-bit/KRISABELL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "bugs": {
+    "url": "https://github.com/kristianmoreno002-bit/KRISABELL/issues"
+  },
+  "homepage": "https://github.com/kristianmoreno002-bit/KRISABELL#readme",
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "mongodb": "^7.8.0"
+  }
+}

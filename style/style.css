@@ -1126,6 +1126,24 @@ ul {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
+.auth-status {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-status[data-state="error"] {
+  color: #842029;
+  background-color: #f8d7da;
+}
+
+.auth-status[data-state="success"] {
+  color: #0f5132;
+  background-color: #d1e7dd;
+}
+
 /* Pestañas (Iniciar Sesión / Crear Cuenta) */
 .auth-tabs {
   display: flex;
@@ -1216,16 +1234,6 @@ ul {
   color: var(--clr-text-muted, #666666);
 }
 
-.forgot-password {
-  color: var(--clr-text-muted, #666666);
-  text-decoration: underline;
-  transition: color 0.3s ease;
-}
-
-.forgot-password:hover {
-  color: var(--clr-text-main, #1a1a1a);
-}
-
 /* Botón de Envío */
 .btn-auth-submit {
   width: 100%;
@@ -1243,6 +1251,11 @@ ul {
   transition: background-color 0.3s ease;
 }
 
+.btn-auth-submit:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
 .btn-auth-submit:hover {
   background-color: var(--clr-accent, #c9a078);
 }
@@ -1253,6 +1266,25 @@ ul {
   color: #2d6a4f;
   font-size: 0.9rem;
   font-weight: 500;
+}
+
+.contacto-confirmacion[data-state="error"] {
+  color: #9c2f26;
+}
+
+.contacto-confirmacion[data-state="loading"] {
+  color: #6f5c32;
+}
+
+.btn-auth-submit:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.catalog-api-error {
+  margin-bottom: 1rem;
+  color: #9c2f26;
+  text-align: center;
 }
 
 /* Responsividad */

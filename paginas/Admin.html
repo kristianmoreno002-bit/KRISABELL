@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panel privado de administración de KRISABELL.">
+  <title>Administración | KRISABELL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style/style.css">
+  <link rel="stylesheet" href="../style/admin.css">
+  <link rel="icon" type="image/png" href="../img/logo.png">
+</head>
+<body class="admin-page">
+  <header class="admin-header">
+    <a class="admin-brand" href="../index.html">KRISABELL <span>Administración</span></a>
+    <a href="../index.html">Volver a la tienda</a>
+  </header>
+
+  <main class="admin-main">
+    <p class="admin-status" id="admin-status" role="status" aria-live="polite"></p>
+
+    <section class="admin-panel admin-login" id="admin-login-section">
+      <h1>Acceso de administración</h1>
+      <p>Ingresa con las credenciales configuradas para el servidor.</p>
+      <form id="admin-login-form">
+        <label for="admin-email">Correo electrónico</label>
+        <input id="admin-email" name="email" type="email" autocomplete="username" required>
+        <label for="admin-password">Contraseña</label>
+        <input id="admin-password" name="password" type="password" autocomplete="current-password" required>
+        <button class="btn-auth-submit" type="submit">Iniciar sesión</button>
+      </form>
+    </section>
+
+    <section class="admin-dashboard" id="admin-dashboard" hidden>
+      <div class="admin-dashboard-heading">
+        <div>
+          <h1>Panel de administración</h1>
+          <p id="admin-identity"></p>
+        </div>
+        <button class="admin-secondary-button" type="button" id="admin-logout">Cerrar sesión</button>
+      </div>
+
+      <section class="admin-panel">
+        <h2>Mensajes de contacto</h2>
+        <div class="admin-contact-list" id="admin-contact-list"></div>
+      </section>
+
+      <section class="admin-panel">
+        <h2>Catálogo de productos</h2>
+        <form class="admin-product-form" id="admin-product-form">
+          <input id="product-id" name="id" type="hidden">
+          <label for="product-name">Nombre</label>
+          <input id="product-name" name="nombre" maxlength="100" required>
+          <label for="product-category">Categoría</label>
+          <select id="product-category" name="categoria" required>
+            <option value="Maquillaje">Maquillaje</option>
+            <option value="Cuidado Facial">Cuidado Facial</option>
+            <option value="Accesorios">Accesorios</option>
+            <option value="Novedades">Novedades</option>
+            <option value="Ofertas">Ofertas</option>
+          </select>
+          <label for="product-subcategory">Subcategoría</label>
+          <input id="product-subcategory" name="subcategoria" maxlength="50" placeholder="Labios, Ojos, Rostro, etc.">
+          <label for="product-price">Precio (COP)</label>
+          <input id="product-price" name="precio" type="number" min="1" step="1" required>
+          <label for="product-description">Descripción</label>
+          <textarea id="product-description" name="descripcion" rows="3" maxlength="1000" required></textarea>
+          <div class="admin-form-actions">
+            <button class="btn-auth-submit" type="submit" id="product-save">Guardar producto</button>
+            <button class="admin-secondary-button" type="button" id="product-cancel" hidden>Cancelar edición</button>
+          </div>
+        </form>
+        <div class="admin-table-scroll">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Estado</th><th>Acciones</th></tr>
+            </thead>
+            <tbody id="admin-product-list"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="../data/api-config.js"></script>
+  <script src="../data/productos.js"></script>
+  <script src="../script.js"></script>
+  <script src="../admin.js"></script>
+  <script src="../chatbot/chatbot.js"></script>
+</body>
+</html>
