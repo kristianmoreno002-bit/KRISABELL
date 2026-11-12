@@ -202,6 +202,50 @@ function createApp(options = {}) {
     res.sendStatus(204);
   });
 
+  // Pedido del cliente. Va bajo /api/auth porque la cookie de sesión del cliente
+  // solo se envía a esa ruta. Los precios SIEMPRE se toman de la base de datos:
+  // lo que mande el navegador (localStorage) no es de fiar.
+  app.post('/api/auth/orders', requireSession(db, 'customer', isProduction), async (req, res) => {
+    const items = validateOrderItems(req.body);
+    if (!items) {
+      return res.status(400).json({ error: 'Tu carrito no es válido. Revisa los productos y cantidades.' });
+    }
+
+    const catalog = await db.findProductsByIds(items.map(item => item.id));
+    const byId = new Map(catalog.map(product => [product.id, product]));
+    if (items.some(item => !byId.has(item.id))) {
+      return res.status(409).json({ error: 'Algún producto ya no está disponible. Actualiza tu carrito.' });
+    }
+
+    const lines = items.map(item => {
+      const product = byId.get(item.id);
+      return { productId: product.id, nombre: product.nombre, precio: product.precio, cantidad: item.quantity };
+    });
+    const subtotal = lines.reduce((sum, line) => sum + line.precio * line.cantidad, 0);
+    const id = randomUUID();
+    const order = {
+      id,
+      code: `KB-${id.slice(0, 6).toUpperCase()}`,
+      customerId: req.authSession.customerId,
+      customerName: req.authSession.name,
+      customerEmail: req.authSession.email,
+      items: lines,
+      subtotal,
+      total: subtotal, // el envío se acuerda aparte: aún no se cobra desde la web
+      estado: 'pendiente_pago',
+      created_at: new Date().toISOString()
+    };
+    await db.createOrder(order);
+
+    res.status(201).json({
+      id,
+      code: order.code,
+      total: order.total,
+      estado: order.estado,
+      message: `Pedido ${order.code} registrado. El pago queda pendiente: te contactaremos para confirmarlo.`
+    });
+  });
+
   app.post('/api/admin/login', async (req, res) => {
     if (!adminPasswordHash) {
       return res.status(503).json({
@@ -261,6 +305,10 @@ function createApp(options = {}) {
       return res.status(404).json({ error: 'No se encontró el mensaje.' });
     }
     res.json({ updated: true });
+  });
+
+  app.get('/api/admin/orders', requireSession(db, 'admin', isProduction), async (req, res) => {
+    res.json(await db.listOrders());
   });
 
   app.get('/api/admin/products', requireSession(db, 'admin', isProduction), async (req, res) => {
@@ -493,6 +541,24 @@ function validateProduct(input) {
   return { nombre, categoria, subcategoria: subcategoria || 'General', precio, descripcion };
 }
 
+// Valida el carrito recibido y junta líneas repetidas del mismo producto.
+function validateOrderItems(input) {
+  if (!input || !Array.isArray(input.items) || input.items.length < 1 || input.items.length > 50) {
+    return null;
+  }
+
+  const merged = new Map();
+  for (const item of input.items) {
+    const id = cleanText(item && item.id, 100);
+    const quantity = Number(item && item.quantity);
+    if (!id || !Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
+      return null;
+    }
+    merged.set(id, Math.min(99, (merged.get(id) || 0) + quantity));
+  }
+  return [...merged].map(([id, quantity]) => ({ id, quantity }));
+}
+
 function cleanText(value, maxLength) {
   if (typeof value !== 'string') {
     return '';
@@ -556,5 +622,6 @@ module.exports = {
   isValidEmail,
   validateContact,
   validateCustomer,
+  validateOrderItems,
   validateProduct
 };

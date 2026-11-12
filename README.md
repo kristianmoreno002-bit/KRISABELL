@@ -1,6 +1,6 @@
 # KRISABELL
 
-Tienda web de cosméticos con catálogo, carrito, chatbot y una API Express independiente. El sitio está hecho con HTML, CSS y JavaScript; la API utiliza MongoDB para el catálogo, los mensajes, las cuentas de clientes y las sesiones.
+Tienda web de cosméticos con catálogo, carrito, chatbot y una API Express independiente. El sitio está hecho con HTML, CSS y JavaScript; la API usa Mongoose (MongoDB) para el catálogo, los mensajes, las cuentas de clientes y las sesiones.
 
 ## Desarrollo local
 
@@ -16,6 +16,32 @@ Requisitos: Node.js 22.13 o superior y MongoDB local o Atlas.
 Las cuentas de clientes requieren un correo válido y una contraseña de 12 a 128 caracteres. Las contraseñas se guardan como hashes scrypt; el servidor entrega cookies HttpOnly y guarda en MongoDB solo el hash de cada token de sesión.
 
 La API ofrece `GET /api/products`, `POST /api/contact`, las rutas de autenticación bajo `/api/auth` y las rutas de administración bajo `/api/admin`.
+
+Los pedidos se registran con `POST /api/auth/orders` (requiere sesión de cliente). El servidor calcula el total con los precios de la base de datos y guarda el pedido como `pendiente_pago`: todavía no hay pasarela de pago. El administrador puede consultarlos en `GET /api/admin/orders`. El sitio muestra mensajes en pantalla al iniciar sesión, cerrar sesión y hacer un pedido.
+
+## Aplicación React (`frontend/`)
+
+Además del sitio estático hay una app en React + Vite que consume la misma API (catálogo, contacto, cuenta de cliente y panel de administración).
+
+```
+cd frontend
+cp .env.example .env     # VITE_API_URL=http://localhost:3001
+npm install
+npm run dev              # http://localhost:5173
+```
+
+Flujo de datos: React -> `fetch` (con `credentials: 'include'`) -> API Express -> Mongoose -> MongoDB. React nunca se conecta directamente a la base de datos.
+
+En producción, define la variable de repositorio `API_URL` (Settings -> Secrets and variables -> Actions -> Variables) con la URL HTTPS de la API; el workflow compila la app y la publica en `/app/` junto al sitio estático.
+
+## Estructura
+
+- `index.js`: servidor Express (rutas, sesiones, validaciones).
+- `src/database.js`: modelos Mongoose y acceso a datos.
+- `data/productos.js`: catálogo inicial compartido por el sitio y la API.
+- `frontend/`: app React.
+- `index.html`, `paginas/`, `script.js`, `admin.js`, `chatbot/`, `style/`: sitio estático.
+- `test/`: pruebas de la API (`npm test`).
 
 ## Publicación
 

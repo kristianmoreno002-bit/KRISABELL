@@ -1,4 +1,4 @@
-name: Deploy static site to GitHub Pages
+name: Deploy site to GitHub Pages
 
 on:
   push:
@@ -23,12 +23,36 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      # La URL de la API de producción se define en Settings > Secrets and variables > Actions > Variables
+      - name: Build React app
+        working-directory: frontend
+        env:
+          VITE_API_URL: ${{ vars.API_URL }}
+        run: |
+          npm ci
+          npm run build
+
+      # Solo se publican los archivos del sitio (no el servidor, pruebas ni código fuente de React).
+      - name: Assemble site
+        run: |
+          mkdir _site
+          cp -r index.html script.js admin.js style paginas img chatbot data _site/
+          cp -r frontend/dist _site/app
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Upload static site
+      - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - name: Publish
         id: deployment
         uses: actions/deploy-pages@v4

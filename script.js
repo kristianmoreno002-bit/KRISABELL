@@ -44,6 +44,50 @@ window.KRISABELL_API = {
   }
 };
 
+/* ==========================================================================
+   MENSAJES EN PANTALLA (toasts)
+   Uso: KRISABELL_TOAST.show('Texto', 'success' | 'error' | 'info', milisegundos)
+   ========================================================================== */
+window.KRISABELL_TOAST = (function () {
+  let container = null;
+
+  function getContainer() {
+    if (!container) {
+      container = document.createElement('div');
+      container.className = 'toast-container';
+      document.body.appendChild(container);
+    }
+    return container;
+  }
+
+  function show(message, type = 'info', duration = 5000) {
+    const toast = document.createElement('div');
+    toast.className = `toast toast--${type}`;
+    // Los errores se anuncian de inmediato a lectores de pantalla; el resto, sin interrumpir.
+    toast.setAttribute('role', type === 'error' ? 'alert' : 'status');
+
+    const text = document.createElement('span');
+    text.textContent = message; // textContent: nunca insertar HTML de fuera
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'toast__close';
+    close.setAttribute('aria-label', 'Cerrar mensaje');
+    close.textContent = '×';
+    toast.append(text, close);
+
+    const remove = () => {
+      toast.classList.add('toast--out');
+      setTimeout(() => toast.remove(), 250);
+    };
+    close.addEventListener('click', remove);
+    getContainer().appendChild(toast);
+    if (duration > 0) setTimeout(remove, duration);
+    return remove;
+  }
+
+  return { show };
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   // Inicializar componentes
   initMobileMenu();
@@ -284,6 +328,13 @@ function initAuthTabs() {
       form.reset();
       showAccount(result.user);
       showStatus('Sesión iniciada.', 'success');
+      const isRegister = path.endsWith('/register');
+      window.KRISABELL_TOAST.show(
+        isRegister
+          ? `¡Cuenta creada! Bienvenido/a, ${result.user.name}.`
+          : `¡Sesión iniciada! Hola de nuevo, ${result.user.name}.`,
+        'success'
+      );
     } catch (error) {
       showStatus(error.message, 'error');
     } finally {
@@ -317,6 +368,7 @@ function initAuthTabs() {
       await window.KRISABELL_API.request('/api/auth/logout', { method: 'POST' });
       showForms();
       showStatus('Sesión cerrada.', 'success');
+      window.KRISABELL_TOAST.show('Sesión cerrada. ¡Hasta pronto!', 'info');
     } catch (error) {
       showStatus(error.message, 'error');
     } finally {
@@ -434,6 +486,45 @@ function renderCartPage() {
 
     subtotalEl.textContent = formatPrice(subtotal);
     totalEl.textContent = formatPrice(subtotal);
+  }
+
+  // Proceder al pago: registra el pedido en el servidor (requiere sesión de cliente).
+  // Aún no hay pasarela de pago: el pedido queda "pendiente de pago" y se avisa al cliente.
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', async () => {
+      const toast = window.KRISABELL_TOAST;
+      const items = Cart.getItems();
+      if (items.length === 0) return;
+
+      if (!window.KRISABELL_API.configured) {
+        toast.show('No se pudo conectar con la tienda. Inténtalo más tarde.', 'error');
+        return;
+      }
+
+      checkoutBtn.disabled = true;
+      const dismissLoading = toast.show('Procesando tu pedido…', 'info', 0);
+      try {
+        const order = await window.KRISABELL_API.request('/api/auth/orders', {
+          method: 'POST',
+          body: JSON.stringify({ items: items.map(item => ({ id: item.id, quantity: item.quantity })) })
+        });
+        Cart.saveItems([]);
+        draw();
+        dismissLoading();
+        toast.show(`¡Pedido ${order.code} registrado! Total: ${formatPrice(order.total)}. El pago queda pendiente: te contactaremos para confirmarlo.`, 'success', 9000);
+      } catch (error) {
+        dismissLoading();
+        if (error.message === 'Inicia sesión para continuar.') {
+          toast.show('Inicia sesión para finalizar tu pedido. Te llevamos al acceso…', 'error', 3500);
+          setTimeout(() => { window.location.href = 'Login.html'; }, 2500);
+        } else {
+          toast.show(error.message, 'error', 7000);
+        }
+      } finally {
+        // draw() deja el botón deshabilitado si el carrito quedó vacío
+        if (Cart.getItems().length > 0) checkoutBtn.disabled = false;
+      }
+    });
   }
 
   // Cambiar cantidad

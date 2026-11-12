@@ -19,6 +19,7 @@ function createMemoryDatabase() {
   const contacts = new Map();
   const customers = new Map();
   const sessions = new Map();
+  const orders = new Map();
 
   return {
     async close() {},
@@ -46,6 +47,18 @@ function createMemoryDatabase() {
       if (!product) return false;
       products.set(id, { ...product, active, updated_at });
       return true;
+    },
+    async findProductsByIds(ids) {
+      return ids.map(id => products.get(id)).filter(product => product && product.active)
+        .map(({ id, nombre, categoria, subcategoria, precio, descripcion, url }) => ({
+          id, nombre, categoria, subcategoria, precio, descripcion, url
+        }));
+    },
+    async createOrder(order) {
+      orders.set(order.id, { ...order });
+    },
+    async listOrders() {
+      return [...orders.values()];
     },
     async createContact(contact) {
       contacts.set(contact.id, { ...contact });
@@ -273,4 +286,38 @@ test('rejects invalid contact data and requests from unconfigured origins', asyn
     headers: { Origin: 'https://otro-sitio.example' }
   });
   assert.equal(forbiddenOrigin.status, 403);
+});
+
+test('orders require a customer session and use server-side prices', async () => {
+  const [first] = storeData.PRODUCTOS;
+  const payload = { items: [{ id: first.id, quantity: 2, price: 1 }] };
+  const headers = { 'Content-Type': 'application/json' };
+
+  const anonymous = await fetch(`${baseUrl}/api/auth/orders`, { method: 'POST', headers, body: JSON.stringify(payload) });
+  assert.equal(anonymous.status, 401);
+
+  const registration = await fetch(`${baseUrl}/api/auth/register`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ name: 'Ana', email: 'ana@example.com', password: 'una-clave-larga-1' })
+  });
+  const cookie = registration.headers.get('set-cookie').split(';')[0];
+  const authed = { ...headers, Cookie: cookie };
+
+  const created = await fetch(`${baseUrl}/api/auth/orders`, { method: 'POST', headers: authed, body: JSON.stringify(payload) });
+  assert.equal(created.status, 201);
+  const order = await created.json();
+  assert.match(order.code, /^KB-[0-9A-F]{6}$/);
+  assert.equal(order.total, first.precio * 2); // ignora el "price: 1" enviado por el navegador
+  assert.equal(order.estado, 'pendiente_pago');
+
+  for (const items of [[], [{ id: first.id, quantity: 0 }], [{ id: first.id, quantity: 1.5 }]]) {
+    const invalid = await fetch(`${baseUrl}/api/auth/orders`, { method: 'POST', headers: authed, body: JSON.stringify({ items }) });
+    assert.equal(invalid.status, 400);
+  }
+
+  const unknown = await fetch(`${baseUrl}/api/auth/orders`, {
+    method: 'POST', headers: authed, body: JSON.stringify({ items: [{ id: 'no-existe', quantity: 1 }] })
+  });
+  assert.equal(unknown.status, 409);
 });
